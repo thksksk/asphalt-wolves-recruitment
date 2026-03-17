@@ -1,10 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Asphalt Wolves | Recrutamento</title>
 
 <style>
@@ -79,11 +79,6 @@ grid-template-columns:1fr 1fr;
 gap:10px;
 }
 
-.small{
-font-size:12px;
-opacity:0.7;
-}
-
 button{
 margin-top:20px;
 width:100%;
@@ -94,29 +89,30 @@ background:#2f7bff;
 color:white;
 font-size:15px;
 cursor:pointer;
-transition:0.2s;
 }
 
 button:hover{
 background:#1b57c9;
 }
 
-.success{
+.center{
 display:none;
 text-align:center;
 }
 
-.rejected{
-display:none;
-text-align:center;
+.spinner{
+margin:20px auto;
+width:40px;
+height:40px;
+border:4px solid rgba(255,255,255,0.3);
+border-top:4px solid white;
+border-radius:50%;
+animation:spin 1s linear infinite;
 }
 
-.success h2{
-color:#7cffc1;
-}
-
-.rejected h2{
-color:#ff7c7c;
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
 }
 
 .join{
@@ -127,6 +123,14 @@ background:#2f7bff;
 color:white;
 text-decoration:none;
 border-radius:8px;
+}
+
+.approved h2{
+color:#7cffc1;
+}
+
+.rejected h2{
+color:#ff7c7c;
 }
 
 </style>
@@ -148,31 +152,27 @@ border-radius:8px;
 
 <form id="recruitForm">
 
-<label>Gamertag / Nome no jogo *</label>
-<input type="text" id="gamertag" maxlength="50" required placeholder="Seu nome no jogo">
+<label>Gamertag / Nome no jogo *</label> <input type="text" id="gamertag" required placeholder="Seu nome no jogo">
 
 <div class="grid">
 
 <div>
-<label>Sua idade *</label>
-<input type="number" id="age" min="15" max="99" required placeholder="Ex: 18">
-<p class="small">Mínimo 15 anos</p>
+<label>Sua idade</label>
+<input type="number" id="age" placeholder="Ex: 18">
 </div>
 
 <div>
-<label>Horas jogadas *</label>
-<input type="number" id="hours" min="10" required placeholder="Ex: 50">
-<p class="small">Mínimo 10 horas</p>
+<label>Horas jogadas</label>
+<input type="number" id="hours" placeholder="Ex: 50">
 </div>
 
 </div>
 
-<label>Instagram (opcional)</label>
-<input type="text" id="instagram" maxlength="100" placeholder="@seuinstagram">
+<label>Instagram (opcional)</label> <input type="text" id="instagram" placeholder="@seuinstagram">
 
 <label>Por que quer entrar na Wolves? *</label>
 
-<textarea id="why" rows="4" maxlength="500" required placeholder="Conte um pouco sobre você e por que quer fazer parte da equipe..."></textarea>
+<textarea id="why" rows="4" required placeholder="Conte um pouco sobre você e por que quer fazer parte da equipe..."></textarea>
 
 <button type="submit">Enviar candidatura</button>
 
@@ -180,12 +180,13 @@ border-radius:8px;
 
 </div>
 
-<div class="success" id="success"></div>
-
-<div class="rejected" id="rejected">
-<h2>✖ Candidatura recusada</h2>
-<p id="reason"></p>
+<div class="center" id="loading">
+<h3>A alcateia está analisando sua candidatura...</h3>
+<div class="spinner"></div>
+<p>Por favor aguarde</p>
 </div>
+
+<div class="center" id="result"></div>
 
 </div>
 
@@ -195,44 +196,52 @@ document.getElementById("recruitForm").addEventListener("submit", function(e){
 
 e.preventDefault()
 
-let gamertag = document.getElementById("gamertag").value
 let age = parseInt(document.getElementById("age").value)
 let hours = parseInt(document.getElementById("hours").value)
-let insta = document.getElementById("instagram").value
-let why = document.getElementById("why").value
-
-let reason = ""
-
-if(isNaN(age) || age < 15){
-reason = "Você precisa ter pelo menos 15 anos para entrar na equipe."
-}
-
-else if(isNaN(hours) || hours < 10){
-reason = "Você precisa ter no mínimo 10 horas de jogo registradas."
-}
-
-if(reason !== ""){
-document.getElementById("formArea").style.display="none"
-document.getElementById("rejected").style.display="block"
-document.getElementById("reason").innerText = reason
-return
-}
 
 document.getElementById("formArea").style.display="none"
-document.getElementById("success").style.display="block"
+document.getElementById("loading").style.display="block"
 
-document.getElementById("success").innerHTML = `
+setTimeout(function(){
+
+document.getElementById("loading").style.display="none"
+let result = document.getElementById("result")
+result.style.display="block"
+
+if(age >= 15 && hours >= 10){
+
+result.className="center approved"
+result.innerHTML = `
 <h2>✔ Candidatura aprovada!</h2>
-
-<p>
-Você atende aos requisitos da alcateia.<br>
-Entre na comunidade oficial abaixo:
-</p>
-
+<p>Você atende aos requisitos da alcateia.</p>
 <a href="https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY" target="_blank" class="join">
 Entrar na comunidade
 </a>
 `
+
+}else{
+
+let reason=""
+
+if(age < 15){
+reason="Idade mínima necessária: 15 anos."
+}
+else if(hours < 10){
+reason="É necessário possuir pelo menos 10 horas de jogo."
+}
+else{
+reason="Sua candidatura não atendeu aos critérios da equipe."
+}
+
+result.className="center rejected"
+result.innerHTML = `
+<h2>✖ Candidatura recusada</h2>
+<p>${reason}</p>
+`
+
+}
+
+},2000)
 
 })
 
