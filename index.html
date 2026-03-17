@@ -328,36 +328,50 @@
     </div>
 
 <script>
-    // BLOQUEIO DE SEGURANÇA (LOCALSTORAGE)
+    const STORAGE_KEY = "wolves_v1_status";
+
     window.onload = function() {
-        if (localStorage.getItem("wolves_v1_sent") === "true") {
-            document.getElementById("mainCard").innerHTML = `
-                <div style="text-align: center; padding: 40px;">
-                    <div style="font-size: 50px; margin-bottom: 20px;">🚫</div>
-                    <h3 style="color:#fb7185; margin-bottom: 10px;">Candidatura já enviada!</h3>
-                    <p style="color: #94a3b8;">Sua ficha já está em nossa base de dados. Aguarde o retorno da liderança.</p>
-                </div>
-            `;
+        const status = localStorage.getItem(STORAGE_KEY);
+        
+        // Se já enviou com sucesso
+        if (status === "sent") {
+            bloquearTela("Candidatura já enviada!", "Sua ficha já está em nossa base de dados. Aguarde o retorno.", "🚫");
+        } 
+        // Se foi reprovado anteriormente por requisitos
+        else if (status === "rejected") {
+            bloquearTela("Acesso Negado", "Você não atende aos requisitos mínimos de idade ou experiência para a alcateia.", "❌");
         }
     };
+
+    function bloquearTela(titulo, mensagem, icone) {
+        document.getElementById("mainCard").innerHTML = `
+            <div style="text-align: center; padding: 40px;">
+                <div style="font-size: 50px; margin-bottom: 20px;">${icone}</div>
+                <h3 style="color:#fb7185; margin-bottom: 10px;">${titulo}</h3>
+                <p style="color: #94a3b8;">${mensagem}</p>
+            </div>
+        `;
+    }
 
     document.getElementById("recruitForm").addEventListener("submit", async function(e){
         e.preventDefault();
 
-        // CAPTURA DOS VALORES PARA VALIDAÇÃO
         const idade = parseInt(document.getElementById("age").value);
         const horas = parseInt(document.getElementById("hours").value);
-        const res = document.getElementById("result");
 
-        // --- VALIDAÇÃO DE REQUISITOS MÍNIMOS ---
+        // --- VALIDAÇÃO RÍGIDA ---
         if (idade < 15 || horas < 10) {
-            alert("Sinto muito! Você não atende aos requisitos mínimos de idade (15+) ou horas de jogo (10h) para se juntar à Asphalt Wolves.");
-            res.style.display = "block";
-            res.innerHTML = `<h3 style="color:#fb7185">❌ Requisitos insuficientes</h3>
-                             <p style="color: #94a3b8;">Você precisa ter pelo menos 15 anos e 10 horas de jogo.</p>`;
-            return; // Interrompe a execução aqui
+            // Marca o usuário como REPROVADO permanentemente no navegador
+            localStorage.setItem(STORAGE_KEY, "rejected");
+            
+            alert("Candidatura Recusada: Você não possui os requisitos mínimos.");
+            
+            // Bloqueia a tela imediatamente para ele não tentar mudar os dados
+            bloquearTela("Recrutamento Encerrado", "Infelizmente você não possui o perfil necessário (15 anos + 10h de jogo).", "❌");
+            return; 
         }
 
+        // Se passou nos requisitos, prossegue com o envio
         const webhookURL = "https://discord.com/api/webhooks/1483546848382685304/fHtmhEVcYiQt-xK01NIm7aIryXfaiMpguZI4A_jon3NlXlnrTogJRquJbisGKM-cF_8n"; 
 
         document.getElementById("recruitForm").style.display = "none";
@@ -401,17 +415,18 @@
             }]
         };
 
-        // ENVIO PARA O DISCORD E REDIRECIONAMENTO APENAS SE APROVADO
         fetch(webhookURL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(msgDiscord)
         }).then(() => {
-            localStorage.setItem("wolves_v1_sent", "true"); 
+            // Marca como ENVIADO com sucesso
+            localStorage.setItem(STORAGE_KEY, "sent"); 
             setTimeout(() => {
                 document.getElementById("loading").style.display = "none";
+                const res = document.getElementById("result");
                 res.style.display = "block";
-                res.innerHTML = `<h3 style="color:#34d399">✔ Ficha Recebida!</h3><p>Redirecionando para o grupo de WhatsApp...</p>`;
+                res.innerHTML = `<h3 style="color:#34d399">✔ Ficha Recebida!</h3><p>Redirecionando para o WhatsApp...</p>`;
                 setTimeout(() => { 
                     window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; 
                 }, 2000);
