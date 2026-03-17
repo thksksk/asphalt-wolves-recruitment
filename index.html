@@ -73,7 +73,7 @@
         #sobre h2 { color: #2f7bff; margin-bottom: 15px; font-size: 28px; }
         #sobre p { color: #94a3b8; line-height: 1.6; font-size: 16px; }
 
-        /* REQUISITOS */
+        /* SEÇÃO REQUISITOS (VOLTOU OS 4 CARDS) */
         .section-title { margin-bottom: 30px; }
         .section-title span { color: #2f7bff; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
         .section-title h2 { font-size: 32px; margin-top: 5px; }
@@ -99,6 +99,8 @@
             display: flex; align-items: center; justify-content: center;
             margin-bottom: 20px; color: #2f7bff; font-size: 20px;
         }
+        .req-card h4 { font-size: 18px; margin-bottom: 10px; color: white; }
+        .req-card p { font-size: 14px; color: #94a3b8; line-height: 1.5; }
 
         /* FORMULÁRIO */
         .form-section { display: flex; justify-content: center; width: 100%; padding-bottom: 100px; }
@@ -163,7 +165,7 @@
         <div id="sobre">
             <h2>Sobre a Asphalt Wolves</h2>
             <p>
-                A Asphalt Wolves nasceu da paixão pela velocidade e pela união. Somos uma alcateia que preza pela lealdade e pela evolução constante. Se busca um ambiente competitivo e amigável, seu lugar é aqui.
+                A Asphalt Wolves nasceu da paixão pela velocidade e pela união. Mais do que uma equipe de jogo, somos uma alcateia que preza pela lealdade, pelo respeito e pela evolução constante de cada membro.
             </p>
         </div>
 
@@ -175,13 +177,23 @@
         <div class="requirements-grid">
             <div class="req-card">
                 <div class="req-icon">⏱</div>
-                <h4>+10 horas</h4>
-                <p>Tempo mínimo de jogo registrado.</p>
+                <h4>+10 horas registradas</h4>
+                <p>É necessário ter no mínimo 10 horas de jogo registradas para garantir que você conhece a mecânica.</p>
             </div>
             <div class="req-card">
                 <div class="req-icon">👤</div>
-                <h4>15 anos+</h4>
-                <p>Idade mínima para entrar na equipe.</p>
+                <h4>15 anos ou mais</h4>
+                <p>Idade mínima para participar da equipe e manter a maturidade do grupo.</p>
+            </div>
+            <div class="req-card">
+                <div class="req-icon">🎮</div>
+                <h4>Player Ativo</h4>
+                <p>Buscamos jogadores que estejam ativos regularmente. Não aceitamos inativos.</p>
+            </div>
+            <div class="req-card">
+                <div class="req-icon">🛡</div>
+                <h4>Comprometimento</h4>
+                <p>Esperamos lealdade e respeito. A alcateia é uma família acima de tudo.</p>
             </div>
         </div>
 
@@ -211,7 +223,7 @@
                     <input type="text" id="horarios" required placeholder="Ex: Todos os dias após as 19h">
 
                     <label>Já foi administrador de outras equipes? Por que saiu? *</label>
-                    <textarea id="adm_exp" rows="2" required placeholder="Conte sua experiência..."></textarea>
+                    <textarea id="adm_exp" rows="2" required placeholder="Conte sua experiência anterior..."></textarea>
 
                     <label>Se compromete a ajudar no recrutamento de novos membros? *</label>
                     <select id="compromisso" required>
@@ -220,8 +232,8 @@
                         <option value="Não">Não posso prometer</option>
                     </select>
 
-                    <label>Por que quer entrar na Wolves? *</label>
-                    <textarea id="why" rows="3" required></textarea>
+                    <label>Por que você quer entrar na equipe? *</label>
+                    <textarea id="why" rows="3" required placeholder="Sua motivação principal..."></textarea>
 
                     <button type="submit" class="btn-submit">Enviar Candidatura</button>
                 </form>
@@ -239,7 +251,6 @@
         document.getElementById("recruitForm").addEventListener("submit", function(e){
             e.preventDefault();
 
-            // DADOS DO FORMULÁRIO
             const dados = {
                 nome: document.getElementById("nome_game").value,
                 idade: document.getElementById("age").value,
@@ -251,16 +262,14 @@
                 motivo: document.getElementById("why").value
             };
 
-            // INSIRA SEU WEBHOOK DO DISCORD AQUI
-            const webhookURL = "SEU_WEBHOOK_AQUI";
+            const webhookURL = "SEU_WEBHOOK_AQUI"; // COLOQUE SEU LINK AQUI
 
             document.getElementById("recruitForm").style.display = "none";
             document.getElementById("loading").style.display = "block";
 
-            // MONTAGEM DA MENSAGEM DISCORD
             const msgDiscord = {
                 embeds: [{
-                    title: "🐺 NOVO RECRUTA NA ÁREA!",
+                    title: "🐺 NOVA FICHA DE RECRUTAMENTO",
                     color: 3111935,
                     fields: [
                         { name: "👤 Nome/Gamertag", value: dados.nome, inline: true },
@@ -272,6 +281,7 @@
                         { name: "🤝 Vai ajudar a recrutar?", value: dados.ajuda },
                         { name: "📝 Motivo", value: dados.motivo }
                     ],
+                    footer: { text: "Sistema Asphalt Wolves" },
                     timestamp: new Date()
                 }]
             };
@@ -287,10 +297,10 @@
                     res.style.display = "block";
 
                     if(parseInt(dados.idade) >= 15) {
-                        res.innerHTML = `<h3 style="color:#34d399">✔ Sucesso!</h3><p>Ficha enviada. Redirecionando...</p>`;
+                        res.innerHTML = `<h3 style="color:#34d399">✔ Enviado com sucesso!</h3><p>Sua ficha está com os líderes. Redirecionando...</p>`;
                         setTimeout(() => { window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; }, 2500);
                     } else {
-                        res.innerHTML = `<h3 style="color:#fb7185">Ficha Registrada</h3><p>Você está abaixo da idade mínima, mas a liderança analisará.</p>`;
+                        res.innerHTML = `<h3 style="color:#fb7185">Ficha Registrada</h3><p>Você é menor de 15 anos, mas sua ficha foi enviada para análise.</p>`;
                     }
                 }, 2000);
             });
