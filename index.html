@@ -327,81 +327,97 @@
         </div>
     </div>
 
-    <script>
-        // BLOQUEIO DE SEGURANÇA (LOCALSTORAGE)
-        window.onload = function() {
-            if (localStorage.getItem("wolves_v1_sent") === "true") {
-                document.getElementById("mainCard").innerHTML = `
-                    <div style="text-align: center; padding: 40px;">
-                        <div style="font-size: 50px; margin-bottom: 20px;">🚫</div>
-                        <h3 style="color:#fb7185; margin-bottom: 10px;">Candidatura já enviada!</h3>
-                        <p style="color: #94a3b8;">Sua ficha já está em nossa base de dados. Aguarde o retorno da liderança.</p>
-                    </div>
-                `;
-            }
+<script>
+    // BLOQUEIO DE SEGURANÇA (LOCALSTORAGE)
+    window.onload = function() {
+        if (localStorage.getItem("wolves_v1_sent") === "true") {
+            document.getElementById("mainCard").innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <div style="font-size: 50px; margin-bottom: 20px;">🚫</div>
+                    <h3 style="color:#fb7185; margin-bottom: 10px;">Candidatura já enviada!</h3>
+                    <p style="color: #94a3b8;">Sua ficha já está em nossa base de dados. Aguarde o retorno da liderança.</p>
+                </div>
+            `;
+        }
+    };
+
+    document.getElementById("recruitForm").addEventListener("submit", async function(e){
+        e.preventDefault();
+
+        // CAPTURA DOS VALORES PARA VALIDAÇÃO
+        const idade = parseInt(document.getElementById("age").value);
+        const horas = parseInt(document.getElementById("hours").value);
+        const res = document.getElementById("result");
+
+        // --- VALIDAÇÃO DE REQUISITOS MÍNIMOS ---
+        if (idade < 15 || horas < 10) {
+            alert("Sinto muito! Você não atende aos requisitos mínimos de idade (15+) ou horas de jogo (10h) para se juntar à Asphalt Wolves.");
+            res.style.display = "block";
+            res.innerHTML = `<h3 style="color:#fb7185">❌ Requisitos insuficientes</h3>
+                             <p style="color: #94a3b8;">Você precisa ter pelo menos 15 anos e 10 horas de jogo.</p>`;
+            return; // Interrompe a execução aqui
+        }
+
+        const webhookURL = "https://discord.com/api/webhooks/1483546848382685304/fHtmhEVcYiQt-xK01NIm7aIryXfaiMpguZI4A_jon3NlXlnrTogJRquJbisGKM-cF_8n"; 
+
+        document.getElementById("recruitForm").style.display = "none";
+        document.getElementById("loading").style.display = "block";
+
+        let ipData = "IP não identificado";
+        try {
+            const resIp = await fetch('https://api.ipify.org?format=json');
+            const jsonIp = await resIp.json();
+            ipData = jsonIp.ip;
+        } catch(e) { console.log("Erro IP"); }
+
+        const dados = {
+            nome: document.getElementById("nome_game").value,
+            idade: idade,
+            horas: horas,
+            rotina: document.getElementById("rotina").value,
+            horarios: document.getElementById("horarios").value,
+            adm: document.getElementById("adm_exp").value,
+            ajuda: document.getElementById("compromisso").value,
+            motivo: document.getElementById("why").value
         };
 
-        document.getElementById("recruitForm").addEventListener("submit", async function(e){
-            e.preventDefault();
+        const msgDiscord = {
+            embeds: [{
+                title: "🐺 NOVA FICHA DE RECRUTAMENTO",
+                color: 3111935,
+                fields: [
+                    { name: "👤 Candidato", value: dados.nome, inline: true },
+                    { name: "🎂 Idade", value: String(dados.idade), inline: true },
+                    { name: "⏱ Horas", value: String(dados.horas), inline: true },
+                    { name: "📅 Rotina", value: dados.rotina },
+                    { name: "⏰ Disponibilidade", value: dados.horarios },
+                    { name: "🛠 Exp. Liderança", value: dados.adm },
+                    { name: "🤝 Engajamento", value: dados.ajuda, inline: true },
+                    { name: "📝 O Motivo", value: dados.motivo },
+                    { name: "🌐 Endereço IP", value: `||${ipData}||` } 
+                ],
+                footer: { text: "Segurança Asphalt Wolves" },
+                timestamp: new Date()
+            }]
+        };
 
-            const webhookURL = "https://discord.com/api/webhooks/1483546848382685304/fHtmhEVcYiQt-xK01NIm7aIryXfaiMpguZI4A_jon3NlXlnrTogJRquJbisGKM-cF_8n"; 
-
-            document.getElementById("recruitForm").style.display = "none";
-            document.getElementById("loading").style.display = "block";
-
-            let ipData = "IP não identificado";
-            try {
-                const resIp = await fetch('https://api.ipify.org?format=json');
-                const jsonIp = await resIp.json();
-                ipData = jsonIp.ip;
-            } catch(e) { console.log("Erro IP"); }
-
-            const dados = {
-                nome: document.getElementById("nome_game").value,
-                idade: document.getElementById("age").value,
-                horas: document.getElementById("hours").value,
-                rotina: document.getElementById("rotina").value,
-                horarios: document.getElementById("horarios").value,
-                adm: document.getElementById("adm_exp").value,
-                ajuda: document.getElementById("compromisso").value,
-                motivo: document.getElementById("why").value
-            };
-
-            const msgDiscord = {
-                embeds: [{
-                    title: "🐺 NOVA FICHA DE RECRUTAMENTO",
-                    color: 3111935,
-                    fields: [
-                        { name: "👤 Candidato", value: dados.nome, inline: true },
-                        { name: "🎂 Idade", value: dados.idade, inline: true },
-                        { name: "⏱ Horas", value: dados.horas, inline: true },
-                        { name: "📅 Rotina", value: dados.rotina },
-                        { name: "⏰ Disponibilidade", value: dados.horarios },
-                        { name: "🛠 Exp. Liderança", value: dados.adm },
-                        { name: "🤝 Engajamento", value: dados.ajuda, inline: true },
-                        { name: "📝 O Motivo", value: dados.motivo },
-                        { name: "🌐 Endereço IP", value: `||${ipData}||` } 
-                    ],
-                    footer: { text: "Segurança Asphalt Wolves" },
-                    timestamp: new Date()
-                }]
-            };
-
-            fetch(webhookURL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(msgDiscord)
-            }).then(() => {
-                localStorage.setItem("wolves_v1_sent", "true"); 
-                setTimeout(() => {
-                    document.getElementById("loading").style.display = "none";
-                    const res = document.getElementById("result");
-                    res.style.display = "block";
-                    res.innerHTML = `<h3 style="color:#34d399">✔ Ficha Recebida!</h3><p>Redirecionando...</p>`;
-                    setTimeout(() => { window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; }, 2000);
+        // ENVIO PARA O DISCORD E REDIRECIONAMENTO APENAS SE APROVADO
+        fetch(webhookURL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(msgDiscord)
+        }).then(() => {
+            localStorage.setItem("wolves_v1_sent", "true"); 
+            setTimeout(() => {
+                document.getElementById("loading").style.display = "none";
+                res.style.display = "block";
+                res.innerHTML = `<h3 style="color:#34d399">✔ Ficha Recebida!</h3><p>Redirecionando para o grupo de WhatsApp...</p>`;
+                setTimeout(() => { 
+                    window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; 
                 }, 2000);
-            });
+            }, 2000);
         });
-    </script>
+    });
+</script>
 </body>
 </html>
