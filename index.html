@@ -6,7 +6,6 @@
     <title>Asphalt Wolves | Recrutamento</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         html { scroll-behavior: smooth; }
 
         /* SCROLLBAR PERSONALIZADA */
@@ -71,11 +70,10 @@
             border: 1px solid rgba(47, 123, 255, 0.1);
             backdrop-filter: blur(10px);
         }
-
         #sobre h2 { color: #2f7bff; margin-bottom: 15px; font-size: 28px; }
         #sobre p { color: #94a3b8; line-height: 1.6; font-size: 16px; }
 
-        /* SEÇÃO REQUISITOS */
+        /* REQUISITOS */
         .section-title { margin-bottom: 30px; }
         .section-title span { color: #2f7bff; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
         .section-title h2 { font-size: 32px; margin-top: 5px; }
@@ -86,7 +84,6 @@
             gap: 20px;
             margin-bottom: 80px;
         }
-
         .req-card {
             background: rgba(15, 23, 42, 0.5);
             padding: 30px;
@@ -94,9 +91,7 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: 0.3s;
         }
-
         .req-card:hover { border-color: #2f7bff; background: rgba(47, 123, 255, 0.05); transform: translateY(-5px); }
-
         .req-icon {
             width: 40px; height: 40px;
             background: rgba(47, 123, 255, 0.1);
@@ -105,31 +100,30 @@
             margin-bottom: 20px; color: #2f7bff; font-size: 20px;
         }
 
-        .req-card h4 { font-size: 18px; margin-bottom: 10px; color: white; }
-        .req-card p { font-size: 14px; color: #94a3b8; line-height: 1.5; }
-
         /* FORMULÁRIO */
         .form-section { display: flex; justify-content: center; width: 100%; padding-bottom: 100px; }
-
         .card {
             background: rgba(15, 23, 42, 0.7);
             backdrop-filter: blur(20px);
             padding: 40px;
             border-radius: 24px;
             width: 100%;
-            max-width: 500px;
+            max-width: 650px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
 
-        input, textarea {
+        label {
+            font-size: 12px; font-weight: bold; color: #cbd5e1;
+            margin-top: 20px; display: block; text-transform: uppercase;
+        }
+        input, textarea, select {
             width: 100%; padding: 14px; margin-top: 8px; border-radius: 12px;
             border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
-            color: white; transition: 0.3s;
+            color: white; transition: 0.3s; font-family: inherit;
         }
-
-        input:focus, textarea:focus { border-color: #2f7bff; outline: none; background: rgba(255,255,255,0.1); }
-
+        input:focus, textarea:focus, select:focus { border-color: #2f7bff; outline: none; background: rgba(255,255,255,0.1); }
+        
         .btn-submit {
             width: 100%; padding: 15px; margin-top: 30px; border: none; border-radius: 12px;
             background: #2f7bff; color: white; font-weight: bold; cursor: pointer; font-size: 16px;
@@ -137,23 +131,17 @@
         }
         .btn-submit:hover { background: #1b57c9; transform: scale(1.02); }
 
-        /* SPINNER DE LOADING */
         .spinner {
-            margin: 20px auto;
-            width: 40px; height: 40px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-top: 4px solid #2f7bff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+            margin: 20px auto; width: 40px; height: 40px;
+            border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #2f7bff;
+            border-radius: 50%; animation: spin 1s linear infinite;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* RESPONSIVIDADE */
         @media (max-width: 768px) {
             .navbar { padding: 15px 5%; }
             .nav-links a:not(.btn-nav) { display: none; }
             .requirements-grid { grid-template-columns: 1fr; }
-            .section-title h2 { font-size: 26px; }
         }
     </style>
 </head>
@@ -175,9 +163,7 @@
         <div id="sobre">
             <h2>Sobre a Asphalt Wolves</h2>
             <p>
-                A Asphalt Wolves nasceu da paixão pela velocidade e pela união. Mais do que uma equipe de jogo, 
-                somos uma alcateia que preza pela lealdade, pelo respeito e pela evolução constante de cada membro. 
-                Se você busca um ambiente competitivo, mas que não abre mão da amizade, seu lugar é aqui.
+                A Asphalt Wolves nasceu da paixão pela velocidade e pela união. Somos uma alcateia que preza pela lealdade e pela evolução constante. Se busca um ambiente competitivo e amigável, seu lugar é aqui.
             </p>
         </div>
 
@@ -189,54 +175,59 @@
         <div class="requirements-grid">
             <div class="req-card">
                 <div class="req-icon">⏱</div>
-                <h4>+10 horas registradas</h4>
-                <p>É necessário ter no mínimo 10 horas de jogo registradas para garantir que você conhece a mecânica.</p>
+                <h4>+10 horas</h4>
+                <p>Tempo mínimo de jogo registrado.</p>
             </div>
             <div class="req-card">
                 <div class="req-icon">👤</div>
-                <h4>15 anos ou mais</h4>
-                <p>Idade mínima de 15 anos para participar da equipe. Sem exceções para manter a maturidade do grupo.</p>
-            </div>
-            <div class="req-card">
-                <div class="req-icon">🎮</div>
-                <h4>Player Ativo</h4>
-                <p>Buscamos jogadores que estejam ativos regularmente. Não aceitamos contas inativas na nossa equipe.</p>
-            </div>
-            <div class="req-card">
-                <div class="req-icon">🛡</div>
-                <h4>Comprometimento</h4>
-                <p>Esperamos lealdade e respeito com os membros da equipe. A alcateia é uma família acima de tudo.</p>
+                <h4>15 anos+</h4>
+                <p>Idade mínima para entrar na equipe.</p>
             </div>
         </div>
 
         <div id="entrar" class="form-section">
             <div class="card">
-                <h3 style="text-align: center; margin-bottom: 10px;">Candidatura</h3>
-                <p style="text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 30px;">Preencha para iniciar o processo.</p>
+                <h3 style="text-align: center;">Candidatura</h3>
                 
                 <form id="recruitForm">
-                    <label style="font-size: 12px; font-weight: bold; color: #cbd5e1;">GAMERTAG *</label>
-                    <input type="text" id="gamertag" required placeholder="Seu nome no jogo">
+                    <label>Seu Nome Real e Gamertag *</label>
+                    <input type="text" id="nome_game" required placeholder="Ex: João / Wolf_Sky">
                     
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
                         <div>
-                            <label style="font-size: 12px; font-weight: bold; color: #cbd5e1;">IDADE</label>
-                            <input type="number" id="age" placeholder="18">
+                            <label>Idade *</label>
+                            <input type="number" id="age" required>
                         </div>
                         <div>
-                            <label style="font-size: 12px; font-weight: bold; color: #cbd5e1;">HORAS</label>
-                            <input type="number" id="hours" placeholder="50">
+                            <label>Horas de Jogo *</label>
+                            <input type="number" id="hours" required>
                         </div>
                     </div>
 
-                    <label style="font-size: 12px; font-weight: bold; color: #cbd5e1; margin-top: 15px; display: block;">POR QUE A WOLVES? *</label>
-                    <textarea id="why" rows="4" required placeholder="Me diga o porque você quer entrar na equipe."></textarea>
+                    <label>Você trabalha ou estuda? Está de férias? *</label>
+                    <input type="text" id="rotina" required placeholder="Ex: Estudo de manhã, estou de férias.">
+
+                    <label>Quais seus horários disponíveis? *</label>
+                    <input type="text" id="horarios" required placeholder="Ex: Todos os dias após as 19h">
+
+                    <label>Já foi administrador de outras equipes? Por que saiu? *</label>
+                    <textarea id="adm_exp" rows="2" required placeholder="Conte sua experiência..."></textarea>
+
+                    <label>Se compromete a ajudar no recrutamento de novos membros? *</label>
+                    <select id="compromisso" required>
+                        <option value="">Selecione...</option>
+                        <option value="Sim">Sim, com certeza</option>
+                        <option value="Não">Não posso prometer</option>
+                    </select>
+
+                    <label>Por que quer entrar na Wolves? *</label>
+                    <textarea id="why" rows="3" required></textarea>
 
                     <button type="submit" class="btn-submit">Enviar Candidatura</button>
                 </form>
 
                 <div id="loading" style="display:none; text-align: center; padding: 20px;">
-                    <p>Analisando perfil...</p>
+                    <p>Enviando ficha para a liderança...</p>
                     <div class="spinner"></div>
                 </div>
                 <div id="result" style="display:none; text-align: center; margin-top: 20px;"></div>
@@ -247,36 +238,62 @@
     <script>
         document.getElementById("recruitForm").addEventListener("submit", function(e){
             e.preventDefault();
-            const age = parseInt(document.getElementById("age").value);
-            const hours = parseInt(document.getElementById("hours").value);
-            
+
+            // DADOS DO FORMULÁRIO
+            const dados = {
+                nome: document.getElementById("nome_game").value,
+                idade: document.getElementById("age").value,
+                horas: document.getElementById("hours").value,
+                rotina: document.getElementById("rotina").value,
+                horarios: document.getElementById("horarios").value,
+                adm: document.getElementById("adm_exp").value,
+                ajuda: document.getElementById("compromisso").value,
+                motivo: document.getElementById("why").value
+            };
+
+            // INSIRA SEU WEBHOOK DO DISCORD AQUI
+            const webhookURL = "SEU_WEBHOOK_AQUI";
+
             document.getElementById("recruitForm").style.display = "none";
             document.getElementById("loading").style.display = "block";
 
-            setTimeout(() => {
-                document.getElementById("loading").style.display = "none";
-                const result = document.getElementById("result");
-                result.style.display = "block";
-                
-                if(age >= 15 && hours >= 10) {
-                    result.innerHTML = `
-                        <h3 style="color:#34d399; margin-bottom: 15px;">✔ Aprovado!</h3>
-                        <p style="margin-bottom: 20px;">Você atende aos requisitos da alcateia.</p>
-                        <p>Redirecionando para a comunidade...</p>
-                    `;
-                    
-                    // Redireciona após 2 segundos
-                    setTimeout(() => {
-                        window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY";
-                    }, 2000);
+            // MONTAGEM DA MENSAGEM DISCORD
+            const msgDiscord = {
+                embeds: [{
+                    title: "🐺 NOVO RECRUTA NA ÁREA!",
+                    color: 3111935,
+                    fields: [
+                        { name: "👤 Nome/Gamertag", value: dados.nome, inline: true },
+                        { name: "🎂 Idade", value: dados.idade, inline: true },
+                        { name: "⏱ Horas", value: dados.horas, inline: true },
+                        { name: "📅 Rotina/Férias", value: dados.rotina },
+                        { name: "⏰ Horários", value: dados.horarios },
+                        { name: "🛠 Exp. ADM", value: dados.adm },
+                        { name: "🤝 Vai ajudar a recrutar?", value: dados.ajuda },
+                        { name: "📝 Motivo", value: dados.motivo }
+                    ],
+                    timestamp: new Date()
+                }]
+            };
 
-                } else {
-                    result.innerHTML = `
-                        <h3 style="color:#fb7185; margin-bottom: 15px;">✖ Não aprovado</h3>
-                        <p>Você não cumpre os requisitos mínimos no momento.</p>
-                    `;
-                }
-            }, 2500);
+            fetch(webhookURL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(msgDiscord)
+            }).then(() => {
+                setTimeout(() => {
+                    document.getElementById("loading").style.display = "none";
+                    const res = document.getElementById("result");
+                    res.style.display = "block";
+
+                    if(parseInt(dados.idade) >= 15) {
+                        res.innerHTML = `<h3 style="color:#34d399">✔ Sucesso!</h3><p>Ficha enviada. Redirecionando...</p>`;
+                        setTimeout(() => { window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; }, 2500);
+                    } else {
+                        res.innerHTML = `<h3 style="color:#fb7185">Ficha Registrada</h3><p>Você está abaixo da idade mínima, mas a liderança analisará.</p>`;
+                    }
+                }, 2000);
+            });
         });
     </script>
 </body>
