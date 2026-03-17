@@ -1,251 +1,286 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Asphalt Wolves | Recrutamento</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asphalt Wolves | Recrutamento</title>
 
-<style>
+    <style>
+        /* --- ESTILOS DE ROLAGEM (Scrollbar) --- */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060b1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2f7bff;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1b57c9;
+        }
 
-body{
-margin:0;
-font-family:Arial, Helvetica, sans-serif;
-background:linear-gradient(135deg,#0a1d40,#133c8b);
-display:flex;
-align-items:center;
-justify-content:center;
-min-height:100vh;
-color:white;
-}
+        /* --- BASE DA PÁGINA --- */
+        body {
+            margin: 0;
+            padding: 20px 0;
+            font-family: 'Inter', Arial, sans-serif;
+            background: radial-gradient(circle at center, #133c8b 0%, #0a1d40 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
 
-.card{
-background:rgba(0,0,0,0.45);
-padding:40px;
-border-radius:20px;
-width:90%;
-max-width:520px;
-box-shadow:0 10px 35px rgba(0,0,0,0.4);
-backdrop-filter:blur(8px);
-}
+        /* LOGO DE FUNDO (Marca d'água) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: url('logo.png') no-repeat center;
+            background-size: contain;
+            opacity: 0.05; /* Deixa bem sutil ao fundo */
+            z-index: -1;
+        }
 
-.logo{
-text-align:center;
-margin-bottom:15px;
-}
+        /* --- INTERFACE ESTILO LOVABLE (Card) --- */
+        .card {
+            background: rgba(15, 23, 42, 0.6); /* Glassmorphism */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 40px;
+            border-radius: 24px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 
+                        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            
+            /* Animação de entrada */
+            animation: slideUp 0.8s ease-out;
+        }
 
-.logo img{
-width:130px;
-}
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-h3{
-margin:5px 0;
-text-align:center;
-font-size:22px;
-}
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.sub{
-text-align:center;
-font-size:14px;
-opacity:0.8;
-margin-bottom:25px;
-}
+        .logo img {
+            width: 110px;
+            filter: drop-shadow(0 0 15px rgba(47, 123, 255, 0.4));
+        }
 
-label{
-display:block;
-margin-top:14px;
-font-size:14px;
-}
+        h3 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
 
-input, textarea{
-width:100%;
-padding:10px;
-margin-top:6px;
-border-radius:8px;
-border:none;
-outline:none;
-background:#163a7a;
-color:white;
-}
+        .sub {
+            text-align: center;
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
 
-textarea{
-resize:none;
-}
+        /* --- CAMPOS DE INPUT --- */
+        label {
+            display: block;
+            margin: 16px 0 6px 4px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #cbd5e1;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-.grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-}
+        input, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            box-sizing: border-box;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
 
-button{
-margin-top:20px;
-width:100%;
-padding:12px;
-border:none;
-border-radius:8px;
-background:#2f7bff;
-color:white;
-font-size:15px;
-cursor:pointer;
-}
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #2f7bff;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(47, 123, 255, 0.2);
+        }
 
-button:hover{
-background:#1b57c9;
-}
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
 
-.center{
-display:none;
-text-align:center;
-}
+        /* --- BOTÃO ESTILO GAMER --- */
+        button {
+            margin-top: 30px;
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: #2f7bff;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+            box-shadow: 0 4px 15px rgba(47, 123, 255, 0.3);
+        }
 
-.spinner{
-margin:20px auto;
-width:40px;
-height:40px;
-border:4px solid rgba(255,255,255,0.3);
-border-top:4px solid white;
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
+        button:hover {
+            background: #1b57c9;
+            transform: translateY(-2px);
+        }
 
-@keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
+        button:active {
+            transform: translateY(0);
+        }
 
-.join{
-display:inline-block;
-margin-top:15px;
-padding:10px 18px;
-background:#2f7bff;
-color:white;
-text-decoration:none;
-border-radius:8px;
-}
+        /* --- ESTADOS DE CARREGAMENTO E RESULTADO --- */
+        .center {
+            display: none;
+            text-align: center;
+            padding: 20px 0;
+        }
 
-.approved h2{
-color:#7cffc1;
-}
+        .spinner {
+            margin: 30px auto;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(47, 123, 255, 0.1);
+            border-top: 3px solid #2f7bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
 
-.rejected h2{
-color:#ff7c7c;
-}
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-</style>
+        .join {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #10b981;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: opacity 0.3s;
+        }
 
+        .join:hover { opacity: 0.9; }
+
+        .approved h2 { color: #34d399; margin-bottom: 10px; }
+        .rejected h2 { color: #fb7185; margin-bottom: 10px; }
+
+    </style>
 </head>
 
 <body>
 
-<div class="card">
+    <div class="card">
+        <div class="logo">
+            <img src="logo.png" alt="Asphalt Wolves">
+        </div>
 
-<div class="logo">
-<img src="logo.png">
-</div>
+        <div id="formArea">
+            <h3>Entrar para a Asphalt Wolves</h3>
+            <p class="sub">Preencha os dados abaixo para se candidatar.</p>
 
-<div id="formArea">
+            <form id="recruitForm">
+                <label>Gamertag / Nome no jogo *</label> 
+                <input type="text" id="gamertag" required placeholder="Seu nome no jogo">
 
-<h3>Entrar para a Asphalt Wolves</h3>
-<p class="sub">Preencha os dados abaixo para se candidatar.</p>
+                <div class="grid">
+                    <div>
+                        <label>Sua idade</label>
+                        <input type="number" id="age" placeholder="Ex: 18">
+                    </div>
+                    <div>
+                        <label>Horas jogadas</label>
+                        <input type="number" id="hours" placeholder="Ex: 50">
+                    </div>
+                </div>
 
-<form id="recruitForm">
+                <label>Instagram (opcional)</label> 
+                <input type="text" id="instagram" placeholder="@seuinstagram">
 
-<label>Gamertag / Nome no jogo *</label> <input type="text" id="gamertag" required placeholder="Seu nome no jogo">
+                <label>Por que quer entrar na Wolves? *</label>
+                <textarea id="why" rows="4" required placeholder="Conte um pouco sobre você e por que quer fazer parte da equipe..."></textarea>
 
-<div class="grid">
+                <button type="submit">Enviar candidatura</button>
+            </form>
+        </div>
 
-<div>
-<label>Sua idade</label>
-<input type="number" id="age" placeholder="Ex: 18">
-</div>
+        <div class="center" id="loading">
+            <h3>Analisando perfil...</h3>
+            <div class="spinner"></div>
+            <p style="color: #94a3b8">Aguarde enquanto a alcateia verifica seus dados.</p>
+        </div>
 
-<div>
-<label>Horas jogadas</label>
-<input type="number" id="hours" placeholder="Ex: 50">
-</div>
+        <div class="center" id="result"></div>
+    </div>
 
-</div>
+    <script>
+        document.getElementById("recruitForm").addEventListener("submit", function(e){
+            e.preventDefault();
 
-<label>Instagram (opcional)</label> <input type="text" id="instagram" placeholder="@seuinstagram">
+            let age = parseInt(document.getElementById("age").value);
+            let hours = parseInt(document.getElementById("hours").value);
 
-<label>Por que quer entrar na Wolves? *</label>
+            document.getElementById("formArea").style.display="none";
+            document.getElementById("loading").style.display="block";
 
-<textarea id="why" rows="4" required placeholder="Conte um pouco sobre você e por que quer fazer parte da equipe..."></textarea>
+            setTimeout(function(){
+                document.getElementById("loading").style.display="none";
+                let result = document.getElementById("result");
+                result.style.display="block";
 
-<button type="submit">Enviar candidatura</button>
-
-</form>
-
-</div>
-
-<div class="center" id="loading">
-<h3>A alcateia está analisando sua candidatura...</h3>
-<div class="spinner"></div>
-<p>Por favor aguarde</p>
-</div>
-
-<div class="center" id="result"></div>
-
-</div>
-
-<script>
-
-document.getElementById("recruitForm").addEventListener("submit", function(e){
-
-e.preventDefault()
-
-let age = parseInt(document.getElementById("age").value)
-let hours = parseInt(document.getElementById("hours").value)
-
-document.getElementById("formArea").style.display="none"
-document.getElementById("loading").style.display="block"
-
-setTimeout(function(){
-
-document.getElementById("loading").style.display="none"
-let result = document.getElementById("result")
-result.style.display="block"
-
-if(age >= 15 && hours >= 10){
-
-result.className="center approved"
-result.innerHTML = `
-<h2>✔ Candidatura aprovada!</h2>
-<p>Você atende aos requisitos da alcateia.</p>
-<a href="https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY" target="_blank" class="join">
-Entrar na comunidade
-</a>
-`
-
-}else{
-
-let reason=""
-
-if(age < 15){
-reason="Idade mínima necessária: 15 anos."
-}
-else if(hours < 10){
-reason="É necessário possuir pelo menos 10 horas de jogo."
-}
-else{
-reason="Sua candidatura não atendeu aos critérios da equipe."
-}
-
-result.className="center rejected"
-result.innerHTML = `
-<h2>✖ Candidatura recusada</h2>
-<p>${reason}</p>
-`
-
-}
-
-},2000)
-
-})
-
-</script>
-
+                if(age >= 15 && hours >= 10){
+                    result.className="center approved";
+                    result.innerHTML = `
+                        <h2>✔ Candidatura Aprovada!</h2>
+                        <p>Seu perfil se encaixa perfeitamente na Asphalt Wolves.</p>
+                        <a href="https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY" target="_blank" class="join">
+                            ENTRAR NA COMUNIDADE
+                        </a>
+                    `;
+                } else {
+                    let reason = age < 15 ? "Idade mínima: 15 anos." : "Necessário pelo menos 10h de jogo.";
+                    result.className="center rejected";
+                    result.innerHTML = `
+                        <h2>✖ Candidatura Recusada</h2>
+                        <p>${reason}</p>
+                        <p style="font-size: 13px; color: #94a3b8; margin-top:10px;">Melhore seus status e tente novamente no futuro.</p>
+                    `;
+                }
+            }, 2500);
+        });
+    </script>
 </body>
 </html>
