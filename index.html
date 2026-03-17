@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* NAVBAR RESTAURADA */
+        
         .navbar {
             width: 100%;
             padding: 20px 8%;
@@ -61,7 +61,7 @@
             padding: 0 20px 40px;
         }
 
-        /* SEÇÃO SOBRE NÓS */
+       
         #sobre {
             margin-bottom: 80px;
             padding: 40px;
@@ -73,7 +73,7 @@
         #sobre h2 { color: #2f7bff; margin-bottom: 15px; font-size: 28px; }
         #sobre p { color: #cbd5e1; line-height: 1.6; font-size: 17px; }
 
-        /* REQUISITOS (CARDS ROBUSTOS) */
+       
         .section-title { margin-bottom: 30px; }
         .section-title span { color: #2f7bff; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
         .section-title h2 { font-size: 32px; margin-top: 5px; }
@@ -103,7 +103,7 @@
         .req-card h4 { font-size: 20px; margin-bottom: 12px; color: white; }
         .req-card p { font-size: 15px; color: #94a3b8; line-height: 1.6; }
 
-        /* FORMULÁRIO */
+        
         .form-section { display: flex; justify-content: center; width: 100%; padding-bottom: 100px; }
         .card {
             background: rgba(15, 23, 42, 0.7);
@@ -310,7 +310,7 @@
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(msgDiscord)
             }).then(() => {
-                localStorage.setItem("wolves_v1_sent", "true"); // Ativa o bloqueio
+                localStorage.setItem("wolves_v1_sent", "true"); 
 
                 setTimeout(() => {
                     document.getElementById("loading").style.display = "none";
