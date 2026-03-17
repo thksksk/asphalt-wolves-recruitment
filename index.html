@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="pt-br">
 
 <head>
@@ -107,8 +106,27 @@ display:none;
 text-align:center;
 }
 
+.rejected{
+display:none;
+text-align:center;
+}
+
 .success h2{
 color:#7cffc1;
+}
+
+.rejected h2{
+color:#ff7c7c;
+}
+
+.join{
+display:inline-block;
+margin-top:15px;
+padding:10px 18px;
+background:#2f7bff;
+color:white;
+text-decoration:none;
+border-radius:8px;
 }
 
 </style>
@@ -130,7 +148,8 @@ color:#7cffc1;
 
 <form id="recruitForm">
 
-<label>Gamertag / Nome no jogo *</label> <input type="text" id="gamertag" maxlength="50" required placeholder="Seu nome no jogo">
+<label>Gamertag / Nome no jogo *</label>
+<input type="text" id="gamertag" maxlength="50" required placeholder="Seu nome no jogo">
 
 <div class="grid">
 
@@ -148,7 +167,8 @@ color:#7cffc1;
 
 </div>
 
-<label>Instagram (opcional)</label> <input type="text" id="instagram" maxlength="100" placeholder="@seuinstagram">
+<label>Instagram (opcional)</label>
+<input type="text" id="instagram" maxlength="100" placeholder="@seuinstagram">
 
 <label>Por que quer entrar na Wolves? *</label>
 
@@ -160,15 +180,11 @@ color:#7cffc1;
 
 </div>
 
-<div class="success" id="success">
+<div class="success" id="success"></div>
 
-<h2>✔ Candidatura enviada!</h2>
-
-<p>
-A alcateia recebeu seu pedido.<br>
-Vamos analisar e entrar em contato em breve.
-</p>
-
+<div class="rejected" id="rejected">
+<h2>✖ Candidatura recusada</h2>
+<p id="reason"></p>
 </div>
 
 </div>
@@ -185,18 +201,38 @@ let hours = parseInt(document.getElementById("hours").value)
 let insta = document.getElementById("instagram").value
 let why = document.getElementById("why").value
 
+let reason = ""
+
 if(isNaN(age) || age < 15){
-alert("Você precisa ter pelo menos 15 anos para se candidatar.")
-return
+reason = "Você precisa ter pelo menos 15 anos para entrar na equipe."
 }
 
-if(isNaN(hours) || hours < 10){
-alert("Você precisa ter pelo menos 10 horas registradas.")
+else if(isNaN(hours) || hours < 10){
+reason = "Você precisa ter no mínimo 10 horas de jogo registradas."
+}
+
+if(reason !== ""){
+document.getElementById("formArea").style.display="none"
+document.getElementById("rejected").style.display="block"
+document.getElementById("reason").innerText = reason
 return
 }
 
 document.getElementById("formArea").style.display="none"
 document.getElementById("success").style.display="block"
+
+document.getElementById("success").innerHTML = `
+<h2>✔ Candidatura aprovada!</h2>
+
+<p>
+Você atende aos requisitos da alcateia.<br>
+Entre na comunidade oficial abaixo:
+</p>
+
+<a href="https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY" target="_blank" class="join">
+Entrar na comunidade
+</a>
+`
 
 })
 
