@@ -9,6 +9,7 @@
 
         html { scroll-behavior: smooth; }
 
+        /* SCROLLBAR PERSONALIZADA */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #060b1a; }
         ::-webkit-scrollbar-thumb { background: #2f7bff; border-radius: 10px; }
@@ -47,14 +48,13 @@
         .nav-links a:hover { color: white; }
 
         .btn-nav {
-            background: #2f7bff !important; /* AZUL VOLTOU */
+            background: #2f7bff !important;
             color: white !important;
             padding: 10px 22px;
             border-radius: 10px;
             font-weight: 700;
         }
 
-        /* SEÇÃO DE REQUISITOS (ESTILO PRINT) */
         .container {
             width: 100%;
             max-width: 1000px;
@@ -62,6 +62,20 @@
             padding: 0 20px 40px;
         }
 
+        /* SEÇÃO SOBRE NÓS */
+        #sobre {
+            margin-bottom: 80px;
+            padding: 40px;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 20px;
+            border: 1px solid rgba(47, 123, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        #sobre h2 { color: #2f7bff; margin-bottom: 15px; font-size: 28px; }
+        #sobre p { color: #94a3b8; line-height: 1.6; font-size: 16px; }
+
+        /* SEÇÃO REQUISITOS */
         .section-title { margin-bottom: 30px; }
         .section-title span { color: #2f7bff; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
         .section-title h2 { font-size: 32px; margin-top: 5px; }
@@ -81,31 +95,21 @@
             transition: 0.3s;
         }
 
-        .req-card:hover { border-color: #2f7bff; background: rgba(47, 123, 255, 0.05); }
+        .req-card:hover { border-color: #2f7bff; background: rgba(47, 123, 255, 0.05); transform: translateY(-5px); }
 
         .req-icon {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             background: rgba(47, 123, 255, 0.1);
             border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            color: #2f7bff;
-            font-size: 20px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 20px; color: #2f7bff; font-size: 20px;
         }
 
         .req-card h4 { font-size: 18px; margin-bottom: 10px; color: white; }
         .req-card p { font-size: 14px; color: #94a3b8; line-height: 1.5; }
 
-        /* CARD DO FORMULÁRIO */
-        .form-section {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            padding-bottom: 100px;
-        }
+        /* FORMULÁRIO */
+        .form-section { display: flex; justify-content: center; width: 100%; padding-bottom: 100px; }
 
         .card {
             background: rgba(15, 23, 42, 0.7);
@@ -123,12 +127,26 @@
             border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
             color: white; transition: 0.3s;
         }
+
         input:focus, textarea:focus { border-color: #2f7bff; outline: none; background: rgba(255,255,255,0.1); }
 
         .btn-submit {
             width: 100%; padding: 15px; margin-top: 30px; border: none; border-radius: 12px;
             background: #2f7bff; color: white; font-weight: bold; cursor: pointer; font-size: 16px;
+            transition: 0.3s;
         }
+        .btn-submit:hover { background: #1b57c9; transform: scale(1.02); }
+
+        /* SPINNER DE LOADING */
+        .spinner {
+            margin: 20px auto;
+            width: 40px; height: 40px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top: 4px solid #2f7bff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* RESPONSIVIDADE */
         @media (max-width: 768px) {
@@ -154,6 +172,15 @@
     </nav>
 
     <div class="container">
+        <div id="sobre">
+            <h2>Sobre a Asphalt Wolves</h2>
+            <p>
+                A Asphalt Wolves nasceu da paixão pela velocidade e pela união. Mais do que uma equipe de jogo, 
+                somos uma alcateia que preza pela lealdade, pelo respeito e pela evolução constante de cada membro. 
+                Se você busca um ambiente competitivo, mas que não abre mão da amizade, seu lugar é aqui.
+            </p>
+        </div>
+
         <div id="requisitos" class="section-title">
             <span>O QUE EXIGIMOS</span>
             <h2>Requisitos para entrar</h2>
@@ -165,19 +192,16 @@
                 <h4>+10 horas registradas</h4>
                 <p>É necessário ter no mínimo 10 horas de jogo registradas para garantir que você conhece a mecânica.</p>
             </div>
-
             <div class="req-card">
                 <div class="req-icon">👤</div>
                 <h4>15 anos ou mais</h4>
                 <p>Idade mínima de 15 anos para participar da equipe. Sem exceções para manter a maturidade do grupo.</p>
             </div>
-
             <div class="req-card">
                 <div class="req-icon">🎮</div>
                 <h4>Player Ativo</h4>
                 <p>Buscamos jogadores que estejam ativos regularmente. Não aceitamos contas inativas na nossa equipe.</p>
             </div>
-
             <div class="req-card">
                 <div class="req-icon">🛡</div>
                 <h4>Comprometimento</h4>
@@ -206,13 +230,14 @@
                     </div>
 
                     <label style="font-size: 12px; font-weight: bold; color: #cbd5e1; margin-top: 15px; display: block;">POR QUE A WOLVES? *</label>
-                    <textarea id="why" rows="4" required placeholder="Me diga o Porque você quer entrar na equipe."></textarea>
+                    <textarea id="why" rows="4" required placeholder="Me diga o porque você quer entrar na equipe."></textarea>
 
                     <button type="submit" class="btn-submit">Enviar Candidatura</button>
                 </form>
 
                 <div id="loading" style="display:none; text-align: center; padding: 20px;">
-                    <p>Analisando...</p>
+                    <p>Analisando perfil...</p>
+                    <div class="spinner"></div>
                 </div>
                 <div id="result" style="display:none; text-align: center; margin-top: 20px;"></div>
             </div>
@@ -222,8 +247,8 @@
     <script>
         document.getElementById("recruitForm").addEventListener("submit", function(e){
             e.preventDefault();
-            const age = document.getElementById("age").value;
-            const hours = document.getElementById("hours").value;
+            const age = parseInt(document.getElementById("age").value);
+            const hours = parseInt(document.getElementById("hours").value);
             
             document.getElementById("recruitForm").style.display = "none";
             document.getElementById("loading").style.display = "block";
@@ -234,11 +259,25 @@
                 result.style.display = "block";
                 
                 if(age >= 15 && hours >= 10) {
-                    result.innerHTML = `<h3 style="color:#34d399">Aprovado!</h3><p>Bem-vindo à equipe.</p>`;
+                    result.innerHTML = `
+                        <h3 style="color:#34d399; margin-bottom: 15px;">✔ Aprovado!</h3>
+                        <p style="margin-bottom: 20px;">Você atende aos requisitos da alcateia.</p>
+                        <p>Redirecionando para a comunidade...</p>
+                    `;
+                    
+                    // Redireciona após 2 segundos
+                    setTimeout(() => {
+                        window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY";
+                    }, 2000);
+
                 } else {
-                    result.innerHTML = `<h3 style="color:#fb7185">Não aprovado</h3><p>Você não cumpre os requisitos.</p>`;
+                    result.innerHTML = `
+                        <h3 style="color:#fb7185; margin-bottom: 15px;">✖ Não aprovado</h3>
+                        <p>Você não cumpre os requisitos mínimos no momento.</p>
+                        <button onclick="location.reload()" style="background:none; border:none; color:#2f7bff; cursor:pointer; margin-top:15px; text-decoration:underline;">Tentar novamente</button>
+                    `;
                 }
-            }, 2000);
+            }, 2500);
         });
     </script>
 </body>
