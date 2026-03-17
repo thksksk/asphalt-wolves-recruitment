@@ -37,15 +37,15 @@
         }
 
         .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: bold; text-decoration: none; color: white; }
-        .nav-logo img { width: 35px; }
+        .nav-logo img { width: 40px; border-radius: 50%; }
 
         .nav-links { display: flex; align-items: center; gap: 25px; }
         .nav-links a { text-decoration: none; color: rgba(255, 255, 255, 0.7); font-size: 14px; transition: 0.3s; font-weight: 500; }
-        .nav-links a:hover { color: #2f7bff; }
+        .nav-links a:hover { color: #ffb400; }
 
         .btn-nav {
-            background: #2f7bff !important;
-            color: white !important;
+            background: #ffb400 !important;
+            color: #060b1a !important;
             padding: 10px 22px;
             border-radius: 10px;
             font-weight: 700;
@@ -61,16 +61,17 @@
             align-items: center;
             text-align: center;
             padding: 0 20px;
+            /* IMAGEM DO LOBO AZUL COMO FUNDO */
             background: 
-                linear-gradient(rgba(6, 11, 26, 0.7), rgba(6, 11, 26, 0.9)),
-                url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070') center/cover; /* Imagem de fundo temática */
+                linear-gradient(rgba(6, 11, 26, 0.6), rgba(6, 11, 26, 0.9)),
+                url('https://i.imgur.com/hCcy66G.jpeg') center/cover;
             position: relative;
         }
 
         .hero-content { z-index: 2; max-width: 800px; }
 
         .badge {
-            color: #2f7bff;
+            color: #ffb400;
             font-size: 14px;
             font-weight: 800;
             text-transform: uppercase;
@@ -86,9 +87,9 @@
             font-weight: 900;
         }
 
-        /* GRADIENTE NO NOME */
+        /* GRADIENTE NO NOME - COMBINANDO COM O LOBO */
         .gradient-text {
-            background: linear-gradient(135deg, #ffffff 30%, #2f7bff 100%);
+            background: linear-gradient(135deg, #ffffff 30%, #ffb400 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -106,17 +107,17 @@
         .hero-btns { display: flex; gap: 15px; justify-content: center; }
 
         .btn-primary {
-            background: #2f7bff;
-            color: white;
+            background: #ffb400;
+            color: #060b1a;
             padding: 16px 32px;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 700;
             transition: 0.3s;
-            box-shadow: 0 10px 20px rgba(47, 123, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(255, 180, 0, 0.2);
         }
 
-        .btn-primary:hover { transform: translateY(-3px); background: #1b57c9; }
+        .btn-primary:hover { transform: translateY(-3px); background: #e5a100; }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.05);
@@ -212,14 +213,28 @@
             .hero h1 { font-size: 45px; }
             .hero-btns { flex-direction: column; width: 100%; }
         }
+
+        /* ANIMAÇÃO DO SPINNER */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #2f7bff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 15px auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
         <a href="#" class="nav-logo">
-            <img src="logo.png" alt="Logo">
-            <span>Lobos de Asfalto</span>
+            <img src="https://i.imgur.com/hCcy66G.jpeg" alt="Logo Asphalt Wolves">
+            <span>Asphalt Wolves</span>
         </a>
         <div class="nav-links">
             <a href="#requisitos">Requisitos</a>
@@ -273,7 +288,7 @@
             <div class="req-card">
                 <div class="req-icon">🛡</div>
                 <h4>Lealdade Absoluta</h4>
-                <p>Honrar a Tag ASW é fundamental. Prezamos pelo comprometimento e pela boa conduta dentro e fora do game, lembrando que caso seja aceito com os requesitos, É OBRIGATORIO O USO DA TAG ASW DO CLÃ.</p>
+                <p>Honrar a Tag ASW é fundamental. Prezamos pelo comprometimento e pela boa conduta. Caso seja aceito, <b>é obrigatório o uso da tag ASW no jogo</b>.</p>
             </div>
         </div>
 
@@ -320,7 +335,7 @@
 
                 <div id="loading" style="display:none; text-align: center; padding: 20px;">
                     <p>Processando dados e capturando sinal...</p>
-                    <div id="spinner" class="spinner"></div>
+                    <div class="spinner"></div>
                 </div>
                 <div id="result" style="display:none; text-align: center; margin-top: 20px;"></div>
             </div>
@@ -332,14 +347,11 @@
 
     window.onload = function() {
         const status = localStorage.getItem(STORAGE_KEY);
-        
-        // Se já enviou com sucesso
         if (status === "sent") {
             bloquearTela("Candidatura já enviada!", "Sua ficha já está em nossa base de dados. Aguarde o retorno.", "🚫");
         } 
-        // Se foi reprovado anteriormente por requisitos
         else if (status === "rejected") {
-            bloquearTela("Acesso Negado", "Você não atende aos requisitos mínimos de idade ou experiência para a alcateia.", "❌");
+            bloquearTela("Acesso Negado", "Você não atende aos requisitos mínimos para a alcateia neste momento.", "❌");
         }
     };
 
@@ -359,19 +371,13 @@
         const idade = parseInt(document.getElementById("age").value);
         const horas = parseInt(document.getElementById("hours").value);
 
-        // --- VALIDAÇÃO RÍGIDA ---
         if (idade < 15 || horas < 10) {
-            // Marca o usuário como REPROVADO permanentemente no navegador
             localStorage.setItem(STORAGE_KEY, "rejected");
-            
             alert("Candidatura Recusada: Você não possui os requisitos mínimos.");
-            
-            // Bloqueia a tela imediatamente para ele não tentar mudar os dados
             bloquearTela("Recrutamento Encerrado", "Infelizmente você não possui o perfil necessário (15 anos + 10h de jogo).", "❌");
             return; 
         }
 
-        // Se passou nos requisitos, prossegue com o envio
         const webhookURL = "https://discord.com/api/webhooks/1483546848382685304/fHtmhEVcYiQt-xK01NIm7aIryXfaiMpguZI4A_jon3NlXlnrTogJRquJbisGKM-cF_8n"; 
 
         document.getElementById("recruitForm").style.display = "none";
@@ -399,6 +405,7 @@
             embeds: [{
                 title: "🐺 NOVA FICHA DE RECRUTAMENTO",
                 color: 3111935,
+                thumbnail: { url: "https://i.imgur.com/hCcy66G.jpeg" },
                 fields: [
                     { name: "👤 Candidato", value: dados.nome, inline: true },
                     { name: "🎂 Idade", value: String(dados.idade), inline: true },
@@ -420,13 +427,12 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(msgDiscord)
         }).then(() => {
-            // Marca como ENVIADO com sucesso
             localStorage.setItem(STORAGE_KEY, "sent"); 
             setTimeout(() => {
                 document.getElementById("loading").style.display = "none";
                 const res = document.getElementById("result");
                 res.style.display = "block";
-                res.innerHTML = `<h3 style="color:#34d399">✔ Ficha Recebida!</h3><p>Redirecionando para o WhatsApp...</p>`;
+                res.innerHTML = `<h3 style="color:#34d399">✔ Ficha Recebida!</h3><p>Redirecionando...</p>`;
                 setTimeout(() => { 
                     window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; 
                 }, 2000);
