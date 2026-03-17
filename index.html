@@ -15,28 +15,25 @@
 
         body {
             font-family: 'Inter', Arial, sans-serif;
-            background: radial-gradient(circle at center, #133c8b 0%, #0a1d40 100%);
+            background: #060b1a;
             color: white;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
             overflow-x: hidden;
         }
 
-        
+        /* NAVBAR */
         .navbar {
             width: 100%;
             padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 29, 64, 0.9);
+            background: rgba(6, 11, 26, 0.8);
             backdrop-filter: blur(12px);
             position: fixed;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(47, 123, 255, 0.1);
         }
 
         .nav-logo { display: flex; align-items: center; gap: 10px; font-weight: bold; text-decoration: none; color: white; }
@@ -44,7 +41,7 @@
 
         .nav-links { display: flex; align-items: center; gap: 25px; }
         .nav-links a { text-decoration: none; color: rgba(255, 255, 255, 0.7); font-size: 14px; transition: 0.3s; font-weight: 500; }
-        .nav-links a:hover { color: white; }
+        .nav-links a:hover { color: #2f7bff; }
 
         .btn-nav {
             background: #2f7bff !important;
@@ -54,26 +51,105 @@
             font-weight: 700;
         }
 
+        /* --- TELA INICIAL (HERO SECTION) --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: 
+                linear-gradient(rgba(6, 11, 26, 0.7), rgba(6, 11, 26, 0.9)),
+                url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=2070') center/cover; /* Imagem de fundo temática */
+            position: relative;
+        }
+
+        .hero-content { z-index: 2; max-width: 800px; }
+
+        .badge {
+            color: #2f7bff;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 85px);
+            line-height: 1;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        /* GRADIENTE NO NOME */
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 30%, #2f7bff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #94a3b8;
+            margin-bottom: 35px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-btns { display: flex; gap: 15px; justify-content: center; }
+
+        .btn-primary {
+            background: #2f7bff;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(47, 123, 255, 0.3);
+        }
+
+        .btn-primary:hover { transform: translateY(-3px); background: #1b57c9; }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); }
+
+        /* CONTEÚDO PRINCIPAL */
         .container {
             width: 100%;
             max-width: 1000px;
-            margin-top: 120px;
-            padding: 0 20px 40px;
+            margin: 80px auto;
+            padding: 0 20px;
         }
 
-       
         #sobre {
             margin-bottom: 80px;
             padding: 40px;
             background: rgba(15, 23, 42, 0.4);
-            border-radius: 20px;
+            border-radius: 24px;
             border: 1px solid rgba(47, 123, 255, 0.1);
             backdrop-filter: blur(10px);
         }
         #sobre h2 { color: #2f7bff; margin-bottom: 15px; font-size: 28px; }
         #sobre p { color: #cbd5e1; line-height: 1.6; font-size: 17px; }
 
-       
         .section-title { margin-bottom: 30px; }
         .section-title span { color: #2f7bff; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
         .section-title h2 { font-size: 32px; margin-top: 5px; }
@@ -103,23 +179,23 @@
         .req-card h4 { font-size: 20px; margin-bottom: 12px; color: white; }
         .req-card p { font-size: 15px; color: #94a3b8; line-height: 1.6; }
 
-        
+        /* FORMULÁRIO */
         .form-section { display: flex; justify-content: center; width: 100%; padding-bottom: 100px; }
         .card {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(20px);
             padding: 40px;
             border-radius: 24px;
             width: 100%;
             max-width: 650px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(47, 123, 255, 0.2);
             box-shadow: 0 25px 50px rgba(0,0,0,0.4);
         }
 
         label { font-size: 12px; font-weight: bold; color: #cbd5e1; margin-top: 20px; display: block; text-transform: uppercase; }
         input, textarea, select {
             width: 100%; padding: 14px; margin-top: 8px; border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2);
             color: white; font-family: inherit;
         }
         
@@ -127,19 +203,14 @@
             width: 100%; padding: 15px; margin-top: 30px; border: none; border-radius: 12px;
             background: #2f7bff; color: white; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.3s;
         }
-        .btn-submit:hover { background: #1b57c9; transform: scale(1.02); }
-
-        .spinner {
-            margin: 20px auto; width: 40px; height: 40px;
-            border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #2f7bff;
-            border-radius: 50%; animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        .btn-submit:hover { background: #1b57c9; }
 
         @media (max-width: 768px) {
             .navbar { padding: 15px 5%; }
             .nav-links a:not(.btn-nav) { display: none; }
             .requirements-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 45px; }
+            .hero-btns { flex-direction: column; width: 100%; }
         }
     </style>
 </head>
@@ -157,11 +228,24 @@
         </div>
     </nav>
 
+    <header class="hero">
+        <div class="hero-content">
+            <span class="badge">Recrutamento Aberto</span>
+            <h1>Faça parte da<br><span class="gradient-text">Asphalt Wolves</span></h1>
+            <p>Estamos recrutando pilotos dedicados para a nossa alcateia. Se você tem habilidade, disciplina e sede de vitória, seu lugar é aqui.</p>
+            
+            <div class="hero-btns">
+                <a href="#entrar" class="btn-primary">Candidatar-se agora</a>
+                <a href="#requisitos" class="btn-secondary">Ver requisitos</a>
+            </div>
+        </div>
+    </header>
+
     <div class="container">
         <div id="sobre">
             <h2>Sobre a Asphalt Wolves</h2>
             <p>
-                A Asphalt Wolves nasceu da paixão pela velocidade, pela cavalaria dos motores, roncos e pela união inabalável. Não importa se você é experiente ou se está chegando agora, essa comunidade é pra quem gosta de emoção, trabalho em equipe e adrenalina de verdade. Cada carro conta, cada piloto faz diferença. Vem sentir o motor vibrar, aprender na dificuldade e curtir a corrida. Não fique de fora, todos são bem vindos e juntos somos mais fortes💪🏻
+                A Asphalt Wolves nasceu da paixão pela velocidade, pela cavalaria dos motores, roncos e pela união inabalável. Não importa se você é experiente ou se está chegando agora, essa comunidade é pra quem gosta de emoção, trabalho em equipe e adrenalina de verdade. Cada carro conta, cada piloto faz diferença. Vem sentir o motor vibrar, aprender na dificuldade e curtir a corrida. Não fique de fora, todos são bem vindos e juntos somos mais fortes 💪🏻
             </p>
         </div>
 
@@ -174,28 +258,28 @@
             <div class="req-card">
                 <div class="req-icon">⏱</div>
                 <h4>+10 Horas de Jogo</h4>
-                <p>Exigimos um tempo mínimo de estrada para garantir que você já domine as mecânicas básicas de comunidades e do própio cpm para melhor desempenho para a ASW.</p>
+                <p>Exigimos um tempo mínimo de estrada para garantir que você já domine as mecânicas básicas de comunidades e do próprio CPM.</p>
             </div>
             <div class="req-card">
                 <div class="req-icon">👤</div>
                 <h4>Maturidade (15+)</h4>
-                <p>Nossa convivência é baseada no respeito. Por isso, mantemos a idade mínima de 15 anos para garantir um ambiente saudável e comprometido para todos os membros.</p>
+                <p>Nossa convivência é baseada no respeito. Mantemos a idade mínima de 15 anos para garantir um ambiente saudável.</p>
             </div>
             <div class="req-card">
                 <div class="req-icon">🎮</div>
                 <h4>Presença Ativa</h4>
-                <p>Lobo que não caça passa fome. Buscamos membros que participem dos eventos e que interajam dentro da comunidade.</p>
+                <p>Lobo que não caça passa fome. Buscamos membros que participem dos eventos e interajam na comunidade.</p>
             </div>
             <div class="req-card">
                 <div class="req-icon">🛡</div>
                 <h4>Lealdade Absoluta</h4>
-                <p>Honrar a Tag ASW da equipe é fundamental. Prezamos pelo comprometimento e pela boa conduta dentro e fora do game.</p>
+                <p>Honrar a Tag ASW é fundamental. Prezamos pelo comprometimento e pela boa conduta dentro e fora do game.</p>
             </div>
         </div>
 
         <div id="entrar" class="form-section">
             <div class="card" id="mainCard">
-                <h3 style="text-align: center;">Ficha de Recrutamento</h3>
+                <h3 style="text-align: center; font-size: 24px;">Ficha de Recrutamento</h3>
                 
                 <form id="recruitForm">
                     <label>Nome Real e Gamertag *</label>
@@ -236,7 +320,7 @@
 
                 <div id="loading" style="display:none; text-align: center; padding: 20px;">
                     <p>Processando dados e capturando sinal...</p>
-                    <div class="spinner"></div>
+                    <div id="spinner" class="spinner"></div>
                 </div>
                 <div id="result" style="display:none; text-align: center; margin-top: 20px;"></div>
             </div>
@@ -246,12 +330,12 @@
     <script>
         // BLOQUEIO DE SEGURANÇA (LOCALSTORAGE)
         window.onload = function() {
-            if (localStorage.getItem(" wolves_v1_sent") === "true") {
+            if (localStorage.getItem("wolves_v1_sent") === "true") {
                 document.getElementById("mainCard").innerHTML = `
                     <div style="text-align: center; padding: 40px;">
                         <div style="font-size: 50px; margin-bottom: 20px;">🚫</div>
                         <h3 style="color:#fb7185; margin-bottom: 10px;">Candidatura já enviada!</h3>
-                        <p style="color: #94a3b8;">Sua ficha já está em nossa base de dados. Aguarde o retorno da liderança via WhatsApp ou Discord.</p>
+                        <p style="color: #94a3b8;">Sua ficha já está em nossa base de dados. Aguarde o retorno da liderança.</p>
                     </div>
                 `;
             }
@@ -260,12 +344,11 @@
         document.getElementById("recruitForm").addEventListener("submit", async function(e){
             e.preventDefault();
 
-            const webhookURL = "SEU_WEBHOOK_AQUI"; // <--- COLOQUE O SEU LINK AQUI
+            const webhookURL = "SEU_WEBHOOK_AQUI"; 
 
             document.getElementById("recruitForm").style.display = "none";
             document.getElementById("loading").style.display = "block";
 
-            // Captura de IP para o seu controle no Discord
             let ipData = "IP não identificado";
             try {
                 const resIp = await fetch('https://api.ipify.org?format=json');
@@ -288,7 +371,6 @@
                 embeds: [{
                     title: "🐺 NOVA FICHA DE RECRUTAMENTO",
                     color: 3111935,
-                    thumbnail: { url: "https://i.imgur.com/SeuLinkDaLogoAqui.png" }, 
                     fields: [
                         { name: "👤 Candidato", value: dados.nome, inline: true },
                         { name: "🎂 Idade", value: dados.idade, inline: true },
@@ -300,7 +382,7 @@
                         { name: "📝 O Motivo", value: dados.motivo },
                         { name: "🌐 Endereço IP", value: `||${ipData}||` } 
                     ],
-                    footer: { text: "Segurança Asphalt Wolves - Anti-Flood Ativo" },
+                    footer: { text: "Segurança Asphalt Wolves" },
                     timestamp: new Date()
                 }]
             };
@@ -311,24 +393,12 @@
                 body: JSON.stringify(msgDiscord)
             }).then(() => {
                 localStorage.setItem("wolves_v1_sent", "true"); 
-
                 setTimeout(() => {
                     document.getElementById("loading").style.display = "none";
                     const res = document.getElementById("result");
                     res.style.display = "block";
-
-                    if(parseInt(dados.idade) >= 15) {
-                        res.innerHTML = `
-                            <h3 style="color:#34d399; margin-bottom: 10px;">✔ Ficha Recebida!</h3>
-                            <p>Seja bem-vindo à alcateia. Redirecionando para o WhatsApp oficial...</p>
-                        `;
-                        setTimeout(() => { window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; }, 3000);
-                    } else {
-                        res.innerHTML = `
-                            <h3 style="color:#fb7185; margin-bottom: 10px;">Ficha em Análise</h3>
-                            <p>Você não atingiu a idade mínima, mas enviamos sua ficha para a diretoria avaliar seu perfil.</p>
-                        `;
-                    }
+                    res.innerHTML = `<h3 style="color:#34d399">✔ Ficha Recebida!</h3><p>Redirecionando...</p>`;
+                    setTimeout(() => { window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; }, 2000);
                 }, 2000);
             });
         });
