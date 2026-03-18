@@ -51,7 +51,7 @@
             font-weight: 700;
         }
 
-        /* HERO SECTION COM SUA FOTO */
+        /* HERO SECTION COM IMAGEM LOCAL */
         .hero {
             height: 100vh;
             width: 100%;
@@ -63,7 +63,7 @@
             padding: 0 20px;
             background: 
                 linear-gradient(rgba(6, 11, 26, 0.6), rgba(6, 11, 26, 0.9)),
-                url('https://i.imgur.com/hCcy66G.jpeg') center/cover;
+                url('fundo.png') center/cover; /* Alterado para imagem local */
             position: relative;
         }
 
@@ -227,8 +227,7 @@
 
     <nav class="navbar">
         <a href="#" class="nav-logo">
-            <img src="fundo.png" alt="Logo">
-            <span>Asphalt Wolves</span>
+            <img src="logo.png" alt="Logo"> <span>Asphalt Wolves</span>
         </a>
         <div class="nav-links">
             <a href="#requisitos">Requisitos</a>
@@ -376,7 +375,6 @@
             motivo: document.getElementById("why").value
         };
 
-        // Identifica no Discord se foi uma tentativa reprovada ou válida
         const tituloEmbed = passouRequisitos ? "🐺 NOVA FICHA DE RECRUTAMENTO" : "🔴 TENTATIVA REPROVADA (ABAIXO DOS REQUISITOS)";
         const corEmbed = passouRequisitos ? 3111935 : 16729149; 
 
@@ -384,7 +382,7 @@
             embeds: [{
                 title: tituloEmbed,
                 color: corEmbed,
-                thumbnail: { url: "https://i.imgur.com/hCcy66G.jpeg" },
+                // Removido o thumbnail para não enviar imagem ao discord
                 fields: [
                     { name: "👤 Candidato", value: dados.nome, inline: true },
                     { name: "🎂 Idade", value: String(dados.idade), inline: true },
@@ -401,21 +399,18 @@
             }]
         };
 
-        // Envia para o Discord SEMPRE
         fetch(webhookURL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(msgDiscord)
         }).then(() => {
             if (!passouRequisitos) {
-                // Se não passou, bloqueia por segurança
                 localStorage.setItem(STORAGE_KEY, "rejected");
                 setTimeout(() => {
                     document.getElementById("loading").style.display = "none";
                     bloquearTela("Recrutamento Encerrado", "Infelizmente você não possui o perfil necessário (15 anos + 10h de jogo).", "❌");
                 }, 2000);
             } else {
-                // Se passou, segue para o WhatsApp
                 localStorage.setItem(STORAGE_KEY, "sent"); 
                 setTimeout(() => {
                     document.getElementById("loading").style.display = "none";
