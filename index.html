@@ -306,18 +306,17 @@
                 <span>Relações Externas</span>
                 <h2>Contato e Parcerias</h2>
             </div>
-            <p>Representantes de outras equipes interessados em organizar eventos conjuntos, competições ou fechar parcerias diplomáticas podem entrar em contato por meio dos nossos canais oficiais.</p>
+            <p>Representantes de outras equipes interessados em crescer seus membros ou equipe, podem entrar em contato por meio dos nossos canais oficiais.</p>
             
             <div class="social-btns">
-                <a href="#" target="_blank" class="social-btn"><i class="ph ph-whatsapp-logo"></i> Setor de Parcerias</a>
-                <a href="#" target="_blank" class="social-btn"><i class="ph ph-discord-logo"></i> Servidor Discord</a>
-                <a href="#" target="_blank" class="social-btn"><i class="ph ph-instagram-logo"></i> Instagram Oficial</a>
+                <a href="#" target="_blank" class="social-btn"><i class="ph ph-whatsapp-logo"></i> Contato de contratos</a>
+                <a href="https://discord.gg/K9j5v45R" target="_blank" class="social-btn"><i class="ph ph-discord-logo"></i> Servidor Discord</a>
+                <a href="https://www.instagram.com/asphaltwolves.ofc?igsh=MXdjN2lwZTdjdjFhZg==" target="_blank" class="social-btn"><i class="ph ph-instagram-logo"></i> Instagram Oficial</a>
             </div>
         </div>
 
     </div>
 
-    <!-- MODAL FORMULÁRIO -->
     <div id="modalOverlay" class="modal-overlay" onclick="fecharModalFora(event)">
         <div class="modal-content" id="modalContent" onclick="event.stopPropagation()">
             <button class="btn-close" onclick="fecharModal()"><i class="ph ph-x"></i></button>
@@ -386,43 +385,27 @@
     </div>
 
 <script>
-    /* =========================================
-       SISTEMA DE SEGURANÇA BÁSICO (ANTI-INSPECT)
-       ========================================= */
-    // Bloqueia clique direito
     document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Bloqueia atalhos de desenvolvedor
     document.onkeydown = function(e) {
-        // F12
         if(e.keyCode == 123) { return false; }
-        // Ctrl+Shift+I / J / C
         if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) { return false; }
-        // Ctrl+U (Ver código-fonte)
         if(e.ctrlKey && e.keyCode == 85) { return false; }
     };
 
-    /* =========================================
-       NAVEGAÇÃO POR ENTER NO FORMULÁRIO
-       ========================================= */
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
-            e.preventDefault(); // Impede o submit acidental
-            
-            // Pega todos os inputs/selects interativos do formulário
+            e.preventDefault();
+
             const formElements = Array.from(document.querySelectorAll('#recruitForm input, #recruitForm select'));
             const index = formElements.indexOf(e.target);
-            
-            // Foca no próximo campo se não for o último (o último é o checkbox de termos)
+)
             if (index > -1 && index < formElements.length - 1) {
                 formElements[index + 1].focus();
             }
         }
     });
-
-    /* =========================================
-       LÓGICA ORIGINAL DO APLICATIVO / WEBHOOK
-       ========================================= */
+    
     const STORAGE_KEY = "wolves_v3_cpm2";
 
     function abrirModal() {
@@ -507,7 +490,7 @@
                 fields: [
                     { name: "👤 Identificação", value: dados.nome, inline: true },
                     { name: "🎂 Idade", value: String(dados.idade), inline: true },
-                    { name: "⏱ Horas de Voo", value: String(dados.horas), inline: true },
+                    { name: "⏱ Horas de Jogo", value: String(dados.horas), inline: true },
                     { name: "📅 Ocupação", value: dados.rotina },
                     { name: "⏰ Disponibilidade", value: dados.horarios },
                     { name: "🛠 Histórico", value: dados.adm },
