@@ -393,18 +393,18 @@
         if(e.ctrlKey && e.keyCode == 85) { return false; }
     };
 
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
-            e.preventDefault();
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+        e.preventDefault();
 
-            const formElements = Array.from(document.querySelectorAll('#recruitForm input, #recruitForm select'));
-            const index = formElements.indexOf(e.target);
-)
-            if (index > -1 && index < formElements.length - 1) {
-                formElements[index + 1].focus();
-            }
+        const formElements = Array.from(document.querySelectorAll('#recruitForm input, #recruitForm select'));
+        const index = formElements.indexOf(e.target);
+        
+        if (index > -1 && index < formElements.length - 1) {
+            formElements[index + 1].focus();
         }
-    });
+    }
+});
     
     const STORAGE_KEY = "wolves_v3_cpm2";
 
