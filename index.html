@@ -3,173 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asphalt Wolves | CPM2</title>
+    <title>Asphalt Wolves | Portal de Recrutamento</title>
     <link rel="icon" type="image/png" href="logo.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <style>
         :root {
-            --bg-dark: #060b1a;
-            --primary-color: #2f7bff;
-            --primary-hover: #1b57c9;
-            --text-light: #ffffff;
+            --bg-dark: #0a0a0a;
+            --bg-panel: #121212;
+            --bg-card: #171717;
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
+            --border-color: #262626;
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --glass-bg: rgba(15, 23, 42, 0.6);
-            --glass-border: rgba(47, 123, 255, 0.15);
-            --transition-speed: 0.3s;
+            --transition-speed: 0.2s;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
         body {
-            font-family: 'Inter', Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: var(--bg-dark);
-            color: var(--text-light);
+            color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-up { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-fade-up { animation: fadeIn 0.6s ease-out forwards; }
 
-        /* NAVBAR */
+        /* NAVBAR REFINADA */
         .navbar {
             width: 100%;
-            padding: 20px 8%;
+            padding: 16px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(6, 11, 26, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
             position: fixed;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .nav-logo { display: flex; align-items: center; gap: 12px; font-weight: 900; text-decoration: none; color: var(--text-light); font-size: 18px; letter-spacing: 1px; }
-        .nav-logo img { width: 45px; border-radius: 50%; border: 2px solid var(--primary-color); }
+        .nav-logo { 
+            display: flex; align-items: center; gap: 12px; 
+            font-weight: 800; text-decoration: none; 
+            color: var(--text-main); font-size: 16px; 
+            letter-spacing: 0.5px; text-transform: uppercase;
+        }
+        .nav-logo img { width: 36px; border-radius: 4px; }
 
-        .nav-links { display: flex; align-items: center; gap: 30px; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 15px; transition: var(--transition-speed); font-weight: 500; cursor: pointer; }
-        .nav-links a:hover { color: var(--primary-color); }
+        .nav-links { display: flex; align-items: center; gap: 24px; }
+        .nav-links a { 
+            text-decoration: none; color: var(--text-muted); 
+            font-size: 14px; font-weight: 500; transition: var(--transition-speed); 
+        }
+        .nav-links a:hover { color: var(--text-main); }
 
         .btn-nav {
-            background: var(--primary-color) !important;
-            color: var(--text-light) !important;
-            padding: 10px 24px;
-            border-radius: 8px;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(47, 123, 255, 0.2);
+            background: var(--primary-color);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
             border: none;
             cursor: pointer;
+            transition: var(--transition-speed);
         }
-        .btn-nav:hover { background: var(--primary-hover) !important; transform: translateY(-2px); }
+        .btn-nav:hover { background: var(--primary-hover); }
 
-        /* HERO SECTION */
+        /* HERO SECTION CORPORATIVO */
         .hero {
-            height: 100vh;
+            padding: 160px 20px 100px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
-            background: 
-                linear-gradient(to bottom, rgba(6, 11, 26, 0.4), var(--bg-dark)),
-                url('fundo.png') center/cover no-repeat;
-            position: relative;
+            background: radial-gradient(circle at top, #1a2035 0%, var(--bg-dark) 40%);
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .hero-content { z-index: 2; max-width: 800px; margin-top: 60px; }
+        .hero-content { max-width: 700px; }
 
         .badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(47, 123, 255, 0.1); color: var(--primary-color);
-            padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 800;
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px;
-            border: 1px solid var(--glass-border);
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--bg-card); color: var(--text-muted);
+            padding: 4px 12px; border-radius: 4px; font-size: 12px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px;
+            border: 1px solid var(--border-color);
         }
 
-        .hero h1 { font-size: clamp(40px, 8vw, 85px); line-height: 1.1; margin-bottom: 24px; font-weight: 900; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .gradient-text { background: linear-gradient(135deg, #ffffff 10%, var(--primary-color) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero h1 { 
+            font-size: clamp(32px, 6vw, 56px); line-height: 1.1; 
+            margin-bottom: 24px; font-weight: 800; letter-spacing: -1px;
+        }
+        
+        .hero p { 
+            font-size: 16px; color: var(--text-muted); margin-bottom: 40px; 
+            line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto;
+        }
 
-        .hero p { font-size: 18px; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.7; }
-
-        .hero-btns { display: flex; gap: 20px; justify-content: center; }
-        .btn-primary, .btn-secondary { padding: 16px 36px; border-radius: 12px; text-decoration: none; font-weight: 700; transition: all var(--transition-speed); display: flex; align-items: center; gap: 10px; cursor: pointer; border: none; font-size: 16px; }
-        .btn-primary { background: var(--primary-color); color: var(--text-light); box-shadow: 0 10px 25px rgba(47, 123, 255, 0.3); }
-        .btn-primary:hover { transform: translateY(-3px); background: var(--primary-hover); }
-        .btn-secondary { background: rgba(255, 255, 255, 0.05); color: var(--text-light); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.1); transform: translateY(-3px); }
+        .hero-btns { display: flex; gap: 16px; justify-content: center; }
+        .btn-primary, .btn-secondary { 
+            padding: 12px 24px; border-radius: 4px; text-decoration: none; 
+            font-weight: 600; transition: var(--transition-speed); display: flex; 
+            align-items: center; gap: 8px; cursor: pointer; border: none; font-size: 14px; 
+        }
+        .btn-primary { background: var(--primary-color); color: #fff; }
+        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-secondary { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background: #262626; }
 
         /* CONTEÚDO PRINCIPAL */
-        .container { width: 100%; max-width: 1100px; margin: 80px auto; padding: 0 20px; }
+        .container { width: 100%; max-width: 1000px; margin: 80px auto; padding: 0 20px; }
 
-        .section-title { margin-bottom: 40px; text-align: center; }
-        .section-title span { color: var(--primary-color); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 10px; }
-        .section-title h2 { font-size: 36px; font-weight: 900; }
+        .section-title { margin-bottom: 32px; text-align: left; border-bottom: 1px solid var(--border-color); padding-bottom: 16px; }
+        .section-title span { color: var(--primary-color); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; }
+        .section-title h2 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
 
         /* CARDS E GRIDS */
-        .info-box { margin-bottom: 100px; padding: 50px; background: var(--glass-bg); border-radius: 24px; border: 1px solid var(--glass-border); backdrop-filter: blur(12px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); text-align: center; }
-        .info-box p { color: var(--text-muted); line-height: 1.8; font-size: 17px; max-width: 800px; margin: 0 auto; }
+        .info-box { margin-bottom: 80px; }
+        .info-box p { color: var(--text-muted); line-height: 1.6; font-size: 15px; }
 
-        .grid-layout { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-bottom: 100px; }
-        .card-item { background: var(--glass-bg); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.03); transition: all var(--transition-speed); }
-        .card-item:hover { border-color: var(--primary-color); transform: translateY(-8px); background: rgba(47, 123, 255, 0.05); }
-        .icon-box { width: 60px; height: 60px; background: rgba(47, 123, 255, 0.1); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; color: var(--primary-color); font-size: 32px; border: 1px solid var(--glass-border); }
-        .card-item h4 { font-size: 22px; margin-bottom: 15px; font-weight: 700; }
-        .card-item p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+        .grid-layout { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 80px; }
+        .card-item { 
+            background: var(--bg-panel); padding: 32px; border-radius: 6px; 
+            border: 1px solid var(--border-color); transition: var(--transition-speed); 
+        }
+        .card-item:hover { border-color: var(--primary-color); }
+        .icon-box { 
+            color: var(--text-main); font-size: 24px; margin-bottom: 16px; 
+        }
+        .card-item h4 { font-size: 18px; margin-bottom: 12px; font-weight: 600; }
+        .card-item p { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
 
         /* PARCERIAS */
-        .social-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
-        .social-btn { padding: 15px 30px; border-radius: 12px; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 10px; transition: 0.3s; color: white; border: 1px solid rgba(255,255,255,0.1); }
-        .social-btn i { font-size: 24px; }
-        .btn-discord { background: #5865F2; } .btn-discord:hover { background: #4752C4; transform: translateY(-3px); }
-        .btn-whatsapp { background: #25D366; } .btn-whatsapp:hover { background: #1EBE55; transform: translateY(-3px); }
-        .btn-instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); } .btn-instagram:hover { filter: brightness(1.1); transform: translateY(-3px); }
+        .social-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px; }
+        .social-btn { 
+            padding: 12px 20px; border-radius: 4px; text-decoration: none; font-size: 14px;
+            font-weight: 600; display: flex; align-items: center; gap: 8px; 
+            color: var(--text-main); border: 1px solid var(--border-color); background: var(--bg-panel);
+            transition: var(--transition-speed);
+        }
+        .social-btn:hover { background: #262626; }
+        .social-btn i { font-size: 18px; }
 
-        /* MODAL DO FORMULÁRIO (OCULTO POR PADRÃO) */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 20px; }
+        /* MODAL DO FORMULÁRIO */
+        .modal-overlay { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(4px); 
+            z-index: 2000; display: flex; align-items: center; justify-content: center; 
+            opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 20px; 
+        }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         
-        .modal-content { background: var(--bg-dark); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; width: 100%; max-width: 650px; max-height: 90vh; overflow-y: auto; position: relative; transform: scale(0.9); transition: all 0.3s ease; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
-        .modal-overlay.active .modal-content { transform: scale(1); }
+        .modal-content { 
+            background: var(--bg-panel); border: 1px solid var(--border-color); 
+            border-radius: 8px; padding: 40px; width: 100%; max-width: 600px; 
+            max-height: 90vh; overflow-y: auto; position: relative; 
+            transform: translateY(20px); transition: all 0.3s ease; 
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
 
-        .btn-close { position: absolute; top: 20px; right: 25px; background: none; border: none; color: var(--text-muted); font-size: 28px; cursor: pointer; transition: 0.2s; }
-        .btn-close:hover { color: white; transform: rotate(90deg); }
+        .btn-close { 
+            position: absolute; top: 20px; right: 20px; background: none; 
+            border: none; color: var(--text-muted); font-size: 24px; cursor: pointer; 
+        }
+        .btn-close:hover { color: var(--text-main); }
 
-        .modal-content h3 { text-align: center; font-size: 26px; font-weight: 800; margin-bottom: 30px; }
-        .input-group { margin-bottom: 20px; text-align: left; }
-        label { font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px; display: block; text-transform: uppercase; }
-        input, textarea, select { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); color: white; font-family: inherit; font-size: 15px; }
-        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-color); }
+        .modal-content h3 { font-size: 22px; font-weight: 700; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+        .input-group { margin-bottom: 20px; }
+        label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        input, textarea, select { 
+            width: 100%; padding: 12px; border-radius: 4px; border: 1px solid var(--border-color); 
+            background: var(--bg-dark); color: var(--text-main); font-family: inherit; font-size: 14px; 
+            transition: var(--transition-speed);
+        }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--primary-color); background: #000; }
         
-        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; text-align: left; }
-        .checkbox-group input { width: auto; margin-top: 4px; }
-        .checkbox-group label { text-transform: none; font-size: 13px; color: var(--text-muted); font-weight: 400; line-height: 1.5; }
+        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-top: 24px; background: var(--bg-dark); padding: 16px; border-radius: 4px; border: 1px solid var(--border-color); }
+        .checkbox-group input { width: auto; margin-top: 2px; cursor: pointer; }
+        .checkbox-group label { text-transform: none; font-size: 13px; color: var(--text-muted); font-weight: 400; line-height: 1.4; margin: 0; cursor: pointer; }
 
-        .spinner { border: 4px solid rgba(255, 255, 255, 0.1); border-left-color: var(--primary-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        .spinner { 
+            border: 3px solid var(--border-color); border-top-color: var(--primary-color); 
+            border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 0 auto; 
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
 
+        /* AJUSTES MOBILE RESPONSIVOS */
         @media (max-width: 768px) {
-            .navbar { padding: 15px 5%; } .nav-links a:not(.btn-nav) { display: none; }
-            .grid-layout { grid-template-columns: 1fr; } .hero h1 { font-size: 38px; }
-            .hero-btns { flex-direction: column; } .modal-content { padding: 30px 20px; }
+            /* Navbar visível no mobile */
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 12px 20px;
+            }
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px 20px;
+            }
+            .nav-links a { font-size: 13px; }
+            .btn-nav { padding: 6px 12px; font-size: 12px; }
+            
+            .hero { padding: 140px 20px 60px; }
+            .hero h1 { font-size: 28px; }
+            .grid-layout { grid-template-columns: 1fr; }
+            .hero-btns { flex-direction: column; width: 100%; }
+            .modal-content { padding: 24px; }
+            
+            .two-cols { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
@@ -177,24 +241,24 @@
 
     <nav class="navbar">
         <a href="#" class="nav-logo">
-            <img src="logo.png" alt="Logo ASW"> <span>ASPHALT WOLVES</span>
+            <img src="logo.png" alt="Logo ASW" onerror="this.style.display='none'"> <span>Asphalt Wolves</span>
         </a>
         <div class="nav-links">
-            <a href="#sobre">Sobre a Equipe</a>
+            <a href="#sobre">Sobre</a>
             <a href="#requisitos">Requisitos</a>
             <a href="#parcerias">Parcerias</a>
-            <button onclick="abrirModal()" class="btn-nav">Fazer Inscrição</button>
+            <button onclick="abrirModal()" class="btn-nav">Aplicar Vaga</button>
         </div>
     </nav>
 
     <header class="hero">
         <div class="hero-content animate-fade-up">
-            <span class="badge"><i class="ph-bold ph-car-profile"></i> Car Parking Multiplayer 2</span>
-            <h1>Acelere com a<br><span class="gradient-text">Asphalt Wolves</span></h1>
-            <p>A maior alcatéia do CPM2. Se você tem disciplina, gosta de motores rugindo e busca evoluir junto com uma comunidade forte, seu lugar é com a gente.</p>
+            <span class="badge"><i class="ph-bold ph-steering-wheel"></i> Portal CPM2</span>
+            <h1>Recrutamento Oficial<br>Asphalt Wolves</h1>
+            <p>Processo seletivo aberto. Buscamos motoristas dedicados para compor nossa equipe no Car Parking Multiplayer 2. Avaliamos disciplina, maturidade e histórico.</p>
             <div class="hero-btns">
-                <button onclick="abrirModal()" class="btn-primary"><i class="ph-bold ph-steering-wheel"></i> Iniciar Triagem</button>
-                <a href="#parcerias" class="btn-secondary"><i class="ph-bold ph-handshake"></i> Sou de outra equipe</a>
+                <button onclick="abrirModal()" class="btn-primary">Iniciar Aplicação</button>
+                <a href="#requisitos" class="btn-secondary">Ler Diretrizes</a>
             </div>
         </div>
     </header>
@@ -203,137 +267,173 @@
         
         <div id="sobre" class="info-box animate-fade-up">
             <div class="section-title">
-                <span>Nossa Identidade</span>
-                <h2>Dominando as Ruas do CPM2</h2>
+                <span>Visão Geral</span>
+                <h2>Sobre a Organização</h2>
             </div>
-            <p>A Asphalt Wolves nasceu da paixão pela velocidade e pela união inabalável dentro do <strong>Car Parking Multiplayer 2</strong>. Não importa se você é veterano em drift ou se está montando seu primeiro projeto agora, essa comunidade é pra quem curte trabalho em equipe, rolês organizados e adrenalina. Cada carro conta, cada piloto faz diferença. Juntos somos mais fortes!</p>
+            <p>A Asphalt Wolves atua no <strong>Car Parking Multiplayer 2</strong> focada na organização de eventos, simulação de roles organizados e competições internas. Nosso processo de triagem garante que apenas perfis que se alinham com nossa filosofia de respeito e imersão integrem a equipe principal.</p>
         </div>
 
         <div id="requisitos" class="section-title animate-fade-up">
-            <span>Diretrizes da Alcateia</span>
-            <h2>O que buscamos?</h2>
+            <span>Critérios de Seleção</span>
+            <h2>Requisitos Mínimos</h2>
         </div>
 
         <div class="grid-layout animate-fade-up">
             <div class="card-item">
-                <div class="icon-box"><i class="ph-fill ph-timer"></i></div>
-                <h4>+10 Horas de Jogo</h4>
-                <p>Tempo mínimo de estrada no CPM2 para garantir que você já domine a física do jogo e tenha uma garagem básica.</p>
+                <div class="icon-box"><i class="ph ph-clock"></i></div>
+                <h4>Experiência (10h+)</h4>
+                <p>Tempo de jogo necessário para garantir domínio das mecânicas, economia interna e física dos veículos.</p>
             </div>
             <div class="card-item">
-                <div class="icon-box"><i class="ph-fill ph-user-focus"></i></div>
-                <h4>Maturidade (15+)</h4>
-                <p>Nossos encontros são baseados no respeito. Mantemos a idade para garantir um ambiente saudável nos chats de voz.</p>
+                <div class="icon-box"><i class="ph ph-user-circle"></i></div>
+                <h4>Perfil Adulto (15+)</h4>
+                <p>Exigimos maturidade na comunicação. Os canais de voz são restritos para manter o ambiente focado e respeitoso.</p>
             </div>
             <div class="card-item">
-                <div class="icon-box"><i class="ph-fill ph-calendar-check"></i></div>
-                <h4>Presença Ativa</h4>
-                <p>Buscamos membros que participem dos meets, eventos de arrancada e interajam no nosso grupo oficial.</p>
+                <div class="icon-box"><i class="ph ph-calendar-check"></i></div>
+                <h4>Disponibilidade</h4>
+                <p>Comprometimento com cronogramas de encontros oficiais, treinamentos de drift e eventos de equipe.</p>
             </div>
             <div class="card-item">
-                <div class="icon-box"><i class="ph-fill ph-shield-check"></i></div>
-                <h4>Lealdade Absoluta</h4>
-                <p>Honrar a Tag ASW é lei. Aos recrutas aceitos, o uso da tag "Asw_" no nick do jogo é estritamente obrigatório.</p>
+                <div class="icon-box"><i class="ph ph-identification-card"></i></div>
+                <h4>Identificação ASW</h4>
+                <p>Uso obrigatório da tag "Asw_" no registro de piloto do jogo assim que a admissão for aprovada pela diretoria.</p>
             </div>
         </div>
 
-        <div id="parcerias" class="info-box animate-fade-up">
+        <div id="parcerias" class="info-box animate-fade-up" style="margin-bottom: 40px;">
             <div class="section-title">
-                <span>Comunidade Unida</span>
-                <h2>Buscando Parcerias?</h2>
+                <span>Relações Externas</span>
+                <h2>Contato e Parcerias</h2>
             </div>
-            <p>Sabemos que o CPM2 fica muito melhor quando as equipes se unem. Se você é líder ou ADM de outra equipe e quer fechar parcerias, organizar campeonatos de drift, drag races inter-equipes ou rolês em conjunto, nossa diretoria está de portas abertas!</p>
+            <p>Representantes de outras equipes interessados em organizar eventos conjuntos, competições ou fechar parcerias diplomáticas podem entrar em contato por meio dos nossos canais oficiais.</p>
             
             <div class="social-btns">
-                <a href="#" target="_blank" class="social-btn btn-whatsapp"><i class="ph-fill ph-whatsapp-logo"></i> Chamar no WhatsApp</a>
-                <a href="#" target="_blank" class="social-btn btn-discord"><i class="ph-fill ph-discord-logo"></i> Nosso Discord</a>
-                <a href="#" target="_blank" class="social-btn btn-instagram"><i class="ph-fill ph-instagram-logo"></i> @AsphaltWolves</a>
+                <a href="#" target="_blank" class="social-btn"><i class="ph ph-whatsapp-logo"></i> Setor de Parcerias</a>
+                <a href="#" target="_blank" class="social-btn"><i class="ph ph-discord-logo"></i> Servidor Discord</a>
+                <a href="#" target="_blank" class="social-btn"><i class="ph ph-instagram-logo"></i> Instagram Oficial</a>
             </div>
         </div>
 
     </div>
 
+    <!-- MODAL FORMULÁRIO -->
     <div id="modalOverlay" class="modal-overlay" onclick="fecharModalFora(event)">
-        <div class="modal-content" id="modalContent">
+        <div class="modal-content" id="modalContent" onclick="event.stopPropagation()">
             <button class="btn-close" onclick="fecharModal()"><i class="ph ph-x"></i></button>
             
             <div id="formArea">
-                <h3>Ficha de Recrutamento</h3>
+                <h3>Formulário de Aplicação</h3>
                 <form id="recruitForm">
                     <div class="input-group">
-                        <label>Nome Real e Gamertag do CPM2 *</label>
+                        <label>Nome Real / Nickname no CPM2</label>
                         <input type="text" id="nome_game" required placeholder="Ex: Carlos / Asw_King">
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="two-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                         <div class="input-group">
-                            <label>Sua Idade *</label>
+                            <label>Idade Atual</label>
                             <input type="number" id="age" min="1" required placeholder="Ex: 18">
                         </div>
                         <div class="input-group">
-                            <label>Horas no CPM2 *</label>
+                            <label>Horas Registradas (CPM2)</label>
                             <input type="number" id="hours" min="0" required placeholder="Ex: 50">
                         </div>
                     </div>
 
                     <div class="input-group">
-                        <label>Sua rotina *</label>
-                        <input type="text" id="rotina" required placeholder="Trabalha? Estuda? Está de férias?">
+                        <label>Ocupação Atual</label>
+                        <input type="text" id="rotina" required placeholder="Ex: Trabalho de manhã, estudo à noite">
                     </div>
 
                     <div class="input-group">
-                        <label>Horários para jogar *</label>
-                        <input type="text" id="horarios" required placeholder="Ex: Finais de semana e noites">
+                        <label>Disponibilidade de Horário</label>
+                        <input type="text" id="horarios" required placeholder="Ex: Seg a Sex após as 20h">
                     </div>
 
                     <div class="input-group">
-                        <label>Já foi de outra equipe no CPM2? *</label>
-                        <textarea id="adm_exp" rows="2" required placeholder="Conte um pouco da sua história no jogo..."></textarea>
+                        <label>Histórico em Outras Equipes</label>
+                        <input type="text" id="adm_exp" required placeholder="Cite equipes anteriores ou justifique se for a primeira">
                     </div>
 
                     <div class="input-group">
-                        <label>Quer ajudar a equipe a crescer? *</label>
+                        <label>Perfil de Engajamento</label>
                         <select id="compromisso" required>
-                            <option value="">Selecione...</option>
-                            <option value="Sim">Sim, quero ajudar a organizar meets e focar no grupo!</option>
-                            <option value="Não">Só quero colar nos rolês de boa.</option>
+                            <option value="">Selecione sua intenção...</option>
+                            <option value="Sim">Perfil Liderança: Quero ajudar a organizar e gerenciar a equipe.</option>
+                            <option value="Não">Perfil Piloto: Focarei apenas em participar dos eventos.</option>
                         </select>
                     </div>
 
                     <div class="checkbox-group">
                         <input type="checkbox" id="termos" required>
-                        <label for="termos">Concordo com as regras da equipe e permito análise do meu perfil e IP (Anti-Fake).</label>
+                        <label for="termos">Declaro que as informações são verdadeiras, concordo com as regras corporativas e autorizo o registro de IP por segurança.</label>
                     </div>
 
-                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 25px; padding: 18px;">Enviar Ficha <i class="ph-bold ph-paper-plane-right"></i></button>
+                    <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 24px; padding: 14px;">Submeter Aplicação</button>
                 </form>
             </div>
 
-            <div id="loadingArea" style="display:none; text-align: center; padding: 40px 20px;">
+            <div id="loadingArea" style="display:none; text-align: center; padding: 40px 0;">
                 <div class="spinner"></div>
-                <h4 style="color: var(--primary-color); margin-top: 20px; font-size: 20px;">Avaliando Perfil...</h4>
-                <p style="color: var(--text-muted); font-size: 14px; margin-top: 5px;">Não feche essa janela.</p>
+                <h4 style="margin-top: 20px; font-size: 16px; font-weight: 600;">Processando Dados...</h4>
+                <p style="color: var(--text-muted); font-size: 13px; margin-top: 8px;">Por favor, não feche esta janela.</p>
             </div>
 
-            <div id="resultArea" style="display:none; text-align: center; padding: 40px 20px;">
-                </div>
-
+            <div id="resultArea" style="display:none; text-align: center; padding: 30px 0;">
+            </div>
         </div>
     </div>
 
 <script>
+    /* =========================================
+       SISTEMA DE SEGURANÇA BÁSICO (ANTI-INSPECT)
+       ========================================= */
+    // Bloqueia clique direito
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Bloqueia atalhos de desenvolvedor
+    document.onkeydown = function(e) {
+        // F12
+        if(e.keyCode == 123) { return false; }
+        // Ctrl+Shift+I / J / C
+        if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) { return false; }
+        // Ctrl+U (Ver código-fonte)
+        if(e.ctrlKey && e.keyCode == 85) { return false; }
+    };
+
+    /* =========================================
+       NAVEGAÇÃO POR ENTER NO FORMULÁRIO
+       ========================================= */
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+            e.preventDefault(); // Impede o submit acidental
+            
+            // Pega todos os inputs/selects interativos do formulário
+            const formElements = Array.from(document.querySelectorAll('#recruitForm input, #recruitForm select'));
+            const index = formElements.indexOf(e.target);
+            
+            // Foca no próximo campo se não for o último (o último é o checkbox de termos)
+            if (index > -1 && index < formElements.length - 1) {
+                formElements[index + 1].focus();
+            }
+        }
+    });
+
+    /* =========================================
+       LÓGICA ORIGINAL DO APLICATIVO / WEBHOOK
+       ========================================= */
     const STORAGE_KEY = "wolves_v3_cpm2";
 
-    // FUNÇÕES DO MODAL
     function abrirModal() {
         document.getElementById('modalOverlay').classList.add('active');
-        document.body.style.overflow = 'hidden'; // Impede o fundo de rolar
+        document.body.style.overflow = 'hidden';
         verificarStatusAnterior();
     }
 
     function fecharModal() {
         document.getElementById('modalOverlay').classList.remove('active');
-        document.body.style.overflow = 'auto'; // Libera o scroll do fundo
+        document.body.style.overflow = 'auto';
     }
 
     function fecharModalFora(event) {
@@ -349,27 +449,25 @@
         const resultArea = document.getElementById('resultArea');
         resultArea.style.display = 'block';
         resultArea.innerHTML = `
-            <i class="${icone}" style="font-size: 64px; color: ${cor}; margin-bottom: 20px; display: inline-block;"></i>
-            <h3 style="color: ${cor}; margin-bottom: 15px; font-size: 26px;">${titulo}</h3>
-            <p style="color: var(--text-muted); font-size: 16px; line-height: 1.6;">${mensagem}</p>
+            <i class="${icone}" style="font-size: 56px; color: ${cor}; margin-bottom: 20px; display: inline-block;"></i>
+            <h3 style="color: ${cor}; margin-bottom: 12px; font-size: 22px;">${titulo}</h3>
+            <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">${mensagem}</p>
         `;
     }
 
     function verificarStatusAnterior() {
         const status = localStorage.getItem(STORAGE_KEY);
         if (status === "sent") {
-            mostrarResultado("ph-fill ph-check-circle", "#34d399", "Inscrição já realizada!", "Sua ficha está com nossos administradores. Aguarde o retorno.");
+            mostrarResultado("ph ph-check-circle", "#3b82f6", "Cadastro em Análise", "Sua aplicação já foi registrada em nosso sistema. Aguarde contato.");
         } else if (status === "rejected") {
-            mostrarResultado("ph-fill ph-x-circle", "#fb7185", "Acesso Negado", "Seu perfil não atende aos requisitos (15 anos + 10h de jogo). Treine e volte depois!");
+            mostrarResultado("ph ph-x-circle", "#ef4444", "Aplicação Recusada", "Seu perfil não atende aos requisitos corporativos atuais (Idade/Horas).");
         } else {
-            // Se não tem status, garante que o form aparece normal
             document.getElementById('formArea').style.display = 'block';
             document.getElementById('resultArea').style.display = 'none';
             document.getElementById('loadingArea').style.display = 'none';
         }
     }
 
-    // ENVIO DO FORMULÁRIO
     document.getElementById("recruitForm").addEventListener("submit", async function(e){
         e.preventDefault();
 
@@ -382,7 +480,7 @@
         document.getElementById("formArea").style.display = "none";
         document.getElementById("loadingArea").style.display = "block";
 
-        let ipData = "IP não identificado";
+        let ipData = "IP restrito";
         try {
             const resIp = await fetch('https://api.ipify.org?format=json');
             const jsonIp = await resIp.json();
@@ -399,24 +497,24 @@
             ajuda: document.getElementById("compromisso").value
         };
 
-        const tituloEmbed = passouRequisitos ? "🏁 NOVA FICHA CPM2: ASPHALT WOLVES" : "🔴 FICHA REPROVADA (CPM2)";
-        const corEmbed = passouRequisitos ? 3111935 : 16729149; 
+        const tituloEmbed = passouRequisitos ? "🟢 NOVO REGISTRO: APLICAÇÃO ASW" : "🔴 APLICAÇÃO REJEITADA";
+        const corEmbed = passouRequisitos ? 2450411 : 15548997; 
 
         const msgDiscord = {
             embeds: [{
                 title: tituloEmbed,
                 color: corEmbed,
                 fields: [
-                    { name: "👤 Piloto", value: dados.nome, inline: true },
+                    { name: "👤 Identificação", value: dados.nome, inline: true },
                     { name: "🎂 Idade", value: String(dados.idade), inline: true },
-                    { name: "⏱ Horas CPM2", value: String(dados.horas), inline: true },
-                    { name: "📅 Rotina", value: dados.rotina },
-                    { name: "⏰ Horários", value: dados.horarios },
-                    { name: "🛠 Histórico de Equipe", value: dados.adm },
-                    { name: "🤝 Perfil de Liderança", value: dados.ajuda },
-                    { name: "🌐 Endereço IP", value: `||${ipData}||` } 
+                    { name: "⏱ Horas de Voo", value: String(dados.horas), inline: true },
+                    { name: "📅 Ocupação", value: dados.rotina },
+                    { name: "⏰ Disponibilidade", value: dados.horarios },
+                    { name: "🛠 Histórico", value: dados.adm },
+                    { name: "🤝 Perfil", value: dados.ajuda },
+                    { name: "🌐 Protocolo de Segurança", value: `||${ipData}||` } 
                 ],
-                footer: { text: "Sistema ASW - Car Parking Multiplayer 2" },
+                footer: { text: "Portal Corporativo ASW - Logs de Recrutamento" },
                 timestamp: new Date()
             }]
         };
@@ -429,21 +527,21 @@
             if (!passouRequisitos) {
                 localStorage.setItem(STORAGE_KEY, "rejected");
                 setTimeout(() => {
-                    mostrarResultado("ph-fill ph-x-circle", "#fb7185", "Recrutamento Encerrado", "Infelizmente você não possui o perfil necessário no momento.");
-                }, 2000);
+                    mostrarResultado("ph ph-x-circle", "#ef4444", "Sistema Bloqueado", "Os requisitos mínimos não foram atingidos no momento.");
+                }, 1500);
             } else {
                 localStorage.setItem(STORAGE_KEY, "sent"); 
                 setTimeout(() => {
-                    mostrarResultado("ph-fill ph-check-circle", "#34d399", "Aprovado na Triagem!", "Você será redirecionado para a nossa central no WhatsApp.");
+                    mostrarResultado("ph ph-check-circle", "#3b82f6", "Aplicação Concluída", "Processo registrado. Você será direcionado para o setor de atendimento.");
                     setTimeout(() => { 
                         window.location.href = "https://chat.whatsapp.com/BlfeXFuGZ6N3PqbWtOdedY"; 
-                    }, 3000);
-                }, 2000);
+                    }, 2500);
+                }, 1500);
             }
         }).catch(err => {
             document.getElementById("loadingArea").style.display = "none";
             document.getElementById("formArea").style.display = "block";
-            alert("Erro na transmissão. Tente novamente.");
+            alert("Erro de conexão com o servidor. Tente novamente.");
         });
     });
 </script>
